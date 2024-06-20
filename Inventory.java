@@ -1,5 +1,5 @@
 import java.util.HashMap;
-import java.util.Iterator;
+//import java.util.Iterator;
 public class Inventory {
 	private HashMap<Item,Integer> backpack;
 	private int weight;
@@ -9,6 +9,10 @@ public class Inventory {
 		weight = 0;
 		backpack = new HashMap<Item,Integer>();
 	}
+
+	public HashMap<Item, Integer> getBackpack() {
+        return backpack;
+    }
 	
 	public boolean findItem(Item i) {	//ritorna true se un Item i è contenuto nell'inventario
 		if(backpack.containsKey(i)){

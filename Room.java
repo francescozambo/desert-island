@@ -1,5 +1,5 @@
 import java.util.HashMap;
-import java.util.Iterator;
+//import java.util.Iterator;
 
 public class Room {
 	private String idRoom;
@@ -12,6 +12,14 @@ public class Room {
 		connectedRoom = new HashMap<String, Room>();
 		System.out.println("Fine costruttore");
 	}
+
+	public String getIdRoom() {
+        return idRoom;
+    }
+
+	public HashMap<Item, Integer> getRoomItems() {
+        return roomItem;
+    }
 
 	public boolean findItem(Item x) {
 		return roomItem.containsKey(x);
@@ -41,21 +49,21 @@ public class Room {
 	}
 
 	public void showItems() {
-		Iterator<Item> it = roomItem.keySet().iterator();
+		/*Iterator<Item> it = roomItem.keySet().iterator();
 		while(it.hasNext()) {
 			Item key = it.next();
 			int value = roomItem.get(key);
 			System.out.println("OGGETTI NELLA STANZA:");
 			System.out.println(key.getidItem()+": "+value);
 		}
-		/*
+		*/
 		System.out.println("OGGETTI NELLA STANZA:");
 		for (Item key : roomItem.keySet()) {
 			int value = roomItem.get(key);
 			System.out.println(key.getidItem() + ": " + value);
 		}
 
-		*/
+		
 		
 	}
 	public void connectRoom(Room n, Room s, Room e, Room w){
