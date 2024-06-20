@@ -3,31 +3,43 @@ import java.util.Iterator;
 
 public class Room {
 	private String idRoom;
-	HashMap<Item,Integer> roomItem; 
-	HashMap<String, Room>connectedRoom;
+	private HashMap<Item,Integer> roomItem; 
+	private HashMap<String, Room> connectedRoom;
+
 	Room(String name){
 		idRoom = name;
 		roomItem = new HashMap<Item,Integer>();
 		connectedRoom = new HashMap<String, Room>();
 		System.out.println("Fine costruttore");
 	}
+
 	public boolean findItem(Item x) {
-		if(roomItem.containsKey(x))
-			return true;
-		else 
-			return false;
+		return roomItem.containsKey(x);
 	}
+
 	public void addItem(Item x, int quantity) {
+		
+		roomItem.put(x, roomItem.getOrDefault(x, 0) + quantity);
+		//getOrDefault metodo che viene utilizzato per ottenere il 
+		//valore associato a una chiave specificata, oppure un valore di default se la chiave non è presente nella mappa
+		/*
 		if(findItem(x)==false)
 			roomItem.put(x,quantity);
 		else
 			roomItem.put(x,roomItem.get(x)+quantity);
-		
+		*/
 	}
 	public void removeItem(Item x, int quantity) {
-		roomItem.put(x,roomItem.get(x)-quantity);
-		
+		if (findItem(x)) {
+			int currentQuantity = roomItem.get(x);
+			if (currentQuantity <= quantity) {
+				roomItem.remove(x);
+			} else {
+				roomItem.put(x, currentQuantity - quantity);
+			}
+		}																	
 	}
+
 	public void showItems() {
 		Iterator<Item> it = roomItem.keySet().iterator();
 		while(it.hasNext()) {
@@ -36,17 +48,24 @@ public class Room {
 			System.out.println("OGGETTI NELLA STANZA:");
 			System.out.println(key.getidItem()+": "+value);
 		}
+		/*
+		System.out.println("OGGETTI NELLA STANZA:");
+		for (Item key : roomItem.keySet()) {
+			int value = roomItem.get(key);
+			System.out.println(key.getidItem() + ": " + value);
+		}
+
+		*/
 		
 	}
 	public void connectRoom(Room n, Room s, Room e, Room w){
 		System.out.println("Inizio");
-		connectedRoom.put("north", n);
-		connectedRoom.put("south", s);
-		connectedRoom.put("east", e);
-		connectedRoom.put("west", w);
+		if (n != null) connectedRoom.put("north", n);
+		if (s != null) connectedRoom.put("south", s);
+		if (e != null) connectedRoom.put("east", e);
+		if (w != null) connectedRoom.put("west", w);
 	}
 	public Room returnRoom(String s) {
-		Room x = connectedRoom.get(s);
-		return x;
+		return connectedRoom.get(s);
 	}
 }
