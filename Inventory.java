@@ -70,6 +70,7 @@ public class Inventory {
 		if(weight==MAX_WEIGHT)
 			return true;
 		return false;
+		//
 	}
 	public int getWeight(){
 		return weight;
