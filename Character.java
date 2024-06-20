@@ -13,12 +13,10 @@ public class Character {
 		
 	}
 	public boolean isAlive(){
-		if (health==0)
-			return false;
-		return true;
+		return health > 0;
 	}
 	public void setHealth(int x) {
-		health=x;
+		health = x;
 	}
 	public String getIdCharacter() {
 		return idCharacter;

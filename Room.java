@@ -3,23 +3,31 @@ import java.util.Iterator;
 
 public class Room {
 	private String idRoom;
-	HashMap<Item,Integer> roomItem; 
-	HashMap<String, Room>connectedRoom;
+	private HashMap<Item,Integer> roomItem; 
+	private HashMap<String, Room> connectedRoom;
+
 	Room(String name){
 		idRoom = name;
 		roomItem = new HashMap<Item,Integer>();
 		connectedRoom = new HashMap<String, Room>();
 		System.out.println("Fine costruttore");
 	}
+
 	public boolean findItem(Item x) {
 		return roomItem.containsKey(x);
 	}
+
 	public void addItem(Item x, int quantity) {
+		
+		roomItem.put(x, roomItem.getOrDefault(x, 0) + quantity);
+		//getOrDefault metodo che viene utilizzato per ottenere il 
+		//valore associato a una chiave specificata, oppure un valore di default se la chiave non è presente nella mappa
+		/*
 		if(findItem(x)==false)
 			roomItem.put(x,quantity);
 		else
 			roomItem.put(x,roomItem.get(x)+quantity);
-		
+		*/
 	}
 	public void removeItem(Item x, int quantity) {
 		if (findItem(x)) {
