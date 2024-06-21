@@ -50,6 +50,8 @@ public class Main {
             String command = scanner.nextLine().trim().toLowerCase();
 
             switch (command) {
+            	case "back":
+            		player.goback();
                 case "look":
                     currentRoom.showItems();
                     break;
@@ -153,6 +155,7 @@ public class Main {
         System.out.println("pickup - Pick up an item");
         System.out.println("drop - Drop an item");
         System.out.println("interact - Interact with an NPC");
+        System.out.println("back -Go back to the previous room");
         System.out.println("quit - Quit the game");
     }
 }
