@@ -14,10 +14,11 @@ public class Main {
         NPC oceanNPC = new NPC("Fisherman", 80, 8, "Ocean Map Piece");
 
         // Create rooms
+        Room ocean = new Room("Ocean");
         Room beach = new Room("Beach");
         Room forest = new Room("Forest");
         Room cave = new Room("Cave");
-        Room ocean = new Room("Ocean");
+        
 
         // Connect rooms
         beach.connectRoom(ocean, forest, null, null);
