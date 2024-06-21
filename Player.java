@@ -25,7 +25,7 @@ public class Player extends Character {
 	public void attack(NPC n) {
 		
 	}
-	public Room goback() {
+	public Room getLastLocation() {
 		return previousLocation;
 	}
 
