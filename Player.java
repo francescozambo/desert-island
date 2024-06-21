@@ -11,6 +11,7 @@ public class Player extends Character {
 	
 	public void movePlayer(Room r) {//sposta il giocatore in un'altra room
 		actualLocation = r;
+		System.out.println("You've arrived in the: "+actualLocation.getIdRoom());
 	}
 	
 	public Room getLocation() {
