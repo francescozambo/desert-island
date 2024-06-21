@@ -1,7 +1,8 @@
 
 public class Player extends Character {
 	
-	private Room actualLocation;       //CLASSE ROOM ANCORA DA FARE
+	private Room actualLocation;  
+	private Inventory inventory;
 	
 
 	Player(String id, int mH,int d) {
@@ -14,6 +15,9 @@ public class Player extends Character {
 	
 	public Room getLocation() {
 		return actualLocation;
+	}
+	public void attack(NPC n) {
+		
 	}
 
 }
