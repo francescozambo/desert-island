@@ -14,11 +14,10 @@ public class Main {
         NPC oceanNPC = new NPC("Fisherman", 80, 8, "Ocean Map Piece");
 
         // Create rooms
-        Room ocean = new Room("Ocean");
         Room beach = new Room("Beach");
         Room forest = new Room("Forest");
         Room cave = new Room("Cave");
-        
+        Room ocean = new Room("Ocean");
 
         // Connect rooms
         beach.connectRoom(ocean, forest, null, null);
@@ -65,6 +64,15 @@ public class Main {
                         System.out.println("You moved to " + newRoom.getIdRoom());
                     } else {
                         System.out.println("You can't go that way.");
+                    }
+                    break;
+                case "back":
+                    Room lastRoom = player.getLastLocation();
+                    if (lastRoom != null) {
+                        player.movePlayer(lastRoom);
+                        System.out.println("You moved back to " + lastRoom.getIdRoom());
+                    } else {
+                        System.out.println("You have no previous room to go back to.");
                     }
                     break;
                 case "inventory":
@@ -152,6 +160,7 @@ public class Main {
         System.out.println("Available commands:");
         System.out.println("look - Look around the room");
         System.out.println("move - Move to another room");
+        System.out.println("back - Go back to the last room");
         System.out.println("inventory - Show your inventory");
         System.out.println("pickup - Pick up an item");
         System.out.println("drop - Drop an item");

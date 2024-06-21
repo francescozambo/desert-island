@@ -8,11 +8,14 @@ public class Player extends Character {
 
 	Player(String id, int mH,int d) {
 		super(id, mH,d);
+		previousLocation = null;
 	}
 	
 	public void movePlayer(Room r) {//sposta il giocatore in un'altra room
-		previousLocation=actualLocation;
-		actualLocation = r;
+	if (actualLocation != null) {
+		previousLocation = actualLocation;
+	}
+	actualLocation = r;
 		System.out.println("You've arrived in the: "+actualLocation.getIdRoom());
 	}
 	
@@ -22,10 +25,8 @@ public class Player extends Character {
 	public void attack(NPC n) {
 		
 	}
-	public void goback() {
-		Room x=actualLocation;
-		actualLocation=previousLocation;
-		previousLocation=x;
+	public Room goback() {
+		return previousLocation;
 	}
 
 }
