@@ -1,12 +1,17 @@
 import java.util.Scanner;
 
 public class Main {
-
-	public static void main(String[] args) {			
-		// Create items
+    public static void main(String[] args) {
+        // Create items
         Item food = new Item("Food", 1, true);
         Item wood = new Item("Wood", 3, true);
         Item stone = new Item("Stone", 5, true);
+
+        // Create NPCs
+        NPC beachNPC = new NPC("Old Sailor", 50, 5, "Beach Map Piece");
+        NPC forestNPC = new NPC("Hunter", 70, 7, "Forest Map Piece");
+        NPC caveNPC = new NPC("Miner", 60, 6, "Cave Map Piece");
+        NPC oceanNPC = new NPC("Fisherman", 80, 8, "Ocean Map Piece");
 
         // Create rooms
         Room beach = new Room("Beach");
@@ -27,7 +32,7 @@ public class Main {
 
         // Create player
         Player player = new Player("Castaway", 100, 10);
-        player.movePlayer(ocean);
+        player.movePlayer(beach);
 
         // Create inventory for player
         Inventory inventory = new Inventory();
@@ -35,25 +40,20 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean playing = true;
 
+        // Display commands
+        displayCommands();
+
         while (playing) {
             Room currentRoom = player.getLocation();
             System.out.println("\nYou are in " + currentRoom.getIdRoom());
-            System.out.println("What would you like to do?");
-            System.out.println("1. Look around");
-            System.out.println("2. Move");
-            System.out.println("3. Show Inventory");
-            System.out.println("4. Pick up an item");
-            System.out.println("5. Drop an item");
-            System.out.println("6. Quit");
+            System.out.print("> ");
+            String command = scanner.nextLine().trim().toLowerCase();
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
-
-            switch (choice) {
-                case 1:
+            switch (command) {
+                case "look":
                     currentRoom.showItems();
                     break;
-                case 2:
+                case "move":
                     System.out.println("Where would you like to go? (north/south/east/west)");
                     String direction = scanner.nextLine();
                     Room newRoom = currentRoom.returnRoom(direction);
@@ -64,12 +64,13 @@ public class Main {
                         System.out.println("You can't go that way.");
                     }
                     break;
-                case 3:
+                case "inventory":
                     inventory.showInventory();
                     break;
-                case 4:
+                case "pickup":
                     System.out.println("Enter the item name you want to pick up:");
                     String itemNameToPick = scanner.nextLine();
+                    boolean itemPicked = false;
                     for (Item item : currentRoom.getRoomItems().keySet()) {
                         if (item.getidItem().equalsIgnoreCase(itemNameToPick)) {
                             System.out.println("Enter quantity:");
@@ -78,16 +79,21 @@ public class Main {
                             if (currentRoom.getRoomItems().get(item) >= quantityToPick) {
                                 currentRoom.removeItem(item, quantityToPick);
                                 inventory.addItem(item, quantityToPick);
+                                itemPicked = true;
                             } else {
                                 System.out.println("Not enough items in the room.");
                             }
                             break;
                         }
                     }
+                    if (!itemPicked) {
+                        System.out.println("Item not found in the room.");
+                    }
                     break;
-                case 5:
+                case "drop":
                     System.out.println("Enter the item name you want to drop:");
                     String itemNameToDrop = scanner.nextLine();
+                    boolean itemDropped = false;
                     for (Item item : inventory.getBackpack().keySet()) {
                         if (item.getidItem().equalsIgnoreCase(itemNameToDrop)) {
                             System.out.println("Enter quantity:");
@@ -95,20 +101,58 @@ public class Main {
                             scanner.nextLine(); // Consume newline
                             inventory.removeItem(item, quantityToDrop);
                             currentRoom.addItem(item, quantityToDrop);
+                            itemDropped = true;
                             break;
                         }
                     }
+                    if (!itemDropped) {
+                        System.out.println("Item not found in inventory.");
+                    }
                     break;
-                case 6:
+                case "interact":
+                    NPC npc = null;
+                    switch (currentRoom.getIdRoom()) {
+                        case "Beach":
+                            npc = beachNPC;
+                            break;
+                        case "Forest":
+                            npc = forestNPC;
+                            break;
+                        case "Cave":
+                            npc = caveNPC;
+                            break;
+                        case "Ocean":
+                            npc = oceanNPC;
+                            break;
+                    }
+                    if (npc != null) {
+                        String mapPiece = npc.interact();
+                        System.out.println("You interacted with " + npc.getIdCharacter() + " and received: " + mapPiece);
+                    } else {
+                        System.out.println("No NPC here.");
+                    }
+                    break;
+                case "quit":
                     playing = false;
                     System.out.println("Thank you for playing!");
                     break;
                 default:
-                    System.out.println("Invalid choice, try again.");
+                    System.out.println("Invalid command, try again.");
+                    displayCommands();
             }
         }
 
         scanner.close();
-	}
+    }
 
+    private static void displayCommands() {
+        System.out.println("Available commands:");
+        System.out.println("look - Look around the room");
+        System.out.println("move - Move to another room");
+        System.out.println("inventory - Show your inventory");
+        System.out.println("pickup - Pick up an item");
+        System.out.println("drop - Drop an item");
+        System.out.println("interact - Interact with an NPC");
+        System.out.println("quit - Quit the game");
+    }
 }
