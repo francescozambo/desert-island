@@ -1,8 +1,12 @@
+public class NPC extends Character {
+    private String mapPiece;
 
-public class NPC extends Character{
+    NPC(String id, int mH, int d, String mapPiece) {
+        super(id, mH, d);
+        this.mapPiece = mapPiece;
+    }
 
-	NPC(String id, int mH, int d) {
-		super(id, mH, d);
-	}
-
+    public String interact() {
+        return mapPiece;
+    }
 }
