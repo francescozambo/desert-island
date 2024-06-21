@@ -50,8 +50,6 @@ public class Main {
             String command = scanner.nextLine().trim().toLowerCase();
 
             switch (command) {
-            	case "back":
-            		player.goback();
                 case "look":
                     currentRoom.showItems();
                     break;
