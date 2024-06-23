@@ -10,7 +10,6 @@ public class Room {
 		idRoom = name;
 		roomItem = new HashMap<Item,Integer>();
 		connectedRoom = new HashMap<String, Room>();
-		System.out.println("Fine costruttore");
 	}
 
 	public String getIdRoom() {
@@ -67,7 +66,6 @@ public class Room {
 		
 	}
 	public void connectRoom(Room n, Room s, Room e, Room w){
-		System.out.println("Inizio");
 		if (n != null) connectedRoom.put("north", n);
 		if (s != null) connectedRoom.put("south", s);
 		if (e != null) connectedRoom.put("east", e);
