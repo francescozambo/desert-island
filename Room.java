@@ -5,6 +5,7 @@ public class Room {
 	private String idRoom;
 	private HashMap<Item,Integer> roomItem; 
 	private HashMap<String, Room> connectedRoom;
+	private NPC npc;
 
 	Room(String name){
 		idRoom = name;
@@ -73,5 +74,11 @@ public class Room {
 	}
 	public Room returnRoom(String s) {
 		return connectedRoom.get(s);
+	}
+	public void setNPC(String id, int mH, int d, String mapPiece) {
+		npc = new NPC(id,mH,d,mapPiece);
+	}
+	public NPC getNPC() {
+		return npc;
 	}
 }

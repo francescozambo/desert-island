@@ -9,6 +9,7 @@ public class Player extends Character {
 	Player(String id, int mH,int d) {
 		super(id, mH,d);
 		previousLocation = null;
+		inventory=new Inventory();
 	}
 	
 	public void movePlayer(Room r) {//sposta il giocatore in un'altra room
@@ -22,8 +23,8 @@ public class Player extends Character {
 	public Room getLocation() {
 		return actualLocation;
 	}
-	public void attack(NPC n) {
-		
+	public Inventory getInventory() {
+		return inventory;
 	}
 	public Room getLastLocation() {
 		return previousLocation;

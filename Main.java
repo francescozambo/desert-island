@@ -2,41 +2,15 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Create items
-        Item food = new Item("Food", 1, true);
-        Item wood = new Item("Wood", 3, true);
-        Item stone = new Item("Stone", 5, true);
-
-        // Create NPCs
-        NPC beachNPC = new NPC("Old Sailor", 50, 5, "Beach Map Piece");
-        NPC forestNPC = new NPC("Hunter", 70, 7, "Forest Map Piece");
-        NPC caveNPC = new NPC("Miner", 60, 6, "Cave Map Piece");
-        NPC oceanNPC = new NPC("Fisherman", 80, 8, "Ocean Map Piece");
-
-        // Create rooms
-        Room beach = new Room("Beach");
-        Room forest = new Room("Forest");
-        Room cave = new Room("Cave");
-        Room ocean = new Room("Ocean");
-
-        // Connect rooms
-        beach.connectRoom(ocean, forest, null, null);
-        forest.connectRoom(beach, cave, null, null);
-        cave.connectRoom(forest, null, null, null);
-        ocean.connectRoom(null, beach, null, null);
-
-        // Add items to rooms
-        beach.addItem(food, 3);
-        forest.addItem(wood, 5);
-        cave.addItem(stone, 2);
-
-        // Create player
+       
+    	DesertIsland island = new DesertIsland();
+      
+    	 // Create player
         Player player = new Player("Castaway", 100, 10);
-        player.movePlayer(beach);
+        player.movePlayer(island.getStartRoom());
+       
 
-        // Create inventory for player
-        Inventory inventory = new Inventory();
-
+       
         Scanner scanner = new Scanner(System.in);
         boolean playing = true;
 
@@ -74,7 +48,7 @@ public class Main {
                     }
                     break;
                 case "inventory":
-                    inventory.showInventory();
+                   player.getInventory().showInventory();
                     break;
                 case "pickup":
                     System.out.println("Enter the item name you want to pick up:");
@@ -87,7 +61,7 @@ public class Main {
                             scanner.nextLine(); // Consume newline
                             if (currentRoom.getRoomItems().get(item) >= quantityToPick) {
                                 currentRoom.removeItem(item, quantityToPick);
-                                inventory.addItem(item, quantityToPick);
+                                player.getInventory().addItem(item, quantityToPick);
                                 itemPicked = true;
                             } else {
                                 System.out.println("Not enough items in the room.");
@@ -103,12 +77,12 @@ public class Main {
                     System.out.println("Enter the item name you want to drop:");
                     String itemNameToDrop = scanner.nextLine();
                     boolean itemDropped = false;
-                    for (Item item : inventory.getBackpack().keySet()) {
+                    for (Item item : player.getInventory().getBackpack().keySet()) {
                         if (item.getidItem().equalsIgnoreCase(itemNameToDrop)) {
                             System.out.println("Enter quantity:");
                             int quantityToDrop = scanner.nextInt();
                             scanner.nextLine(); // Consume newline
-                            inventory.removeItem(item, quantityToDrop);
+                            player.getInventory().removeItem(item, quantityToDrop);
                             currentRoom.addItem(item, quantityToDrop);
                             itemDropped = true;
                             break;
@@ -120,20 +94,7 @@ public class Main {
                     break;
                 case "interact":
                     NPC npc = null;
-                    switch (currentRoom.getIdRoom()) {
-                        case "Beach":
-                            npc = beachNPC;
-                            break;
-                        case "Forest":
-                            npc = forestNPC;
-                            break;
-                        case "Cave":
-                            npc = caveNPC;
-                            break;
-                        case "Ocean":
-                            npc = oceanNPC;
-                            break;
-                    }
+                    npc=island.getRoomNPC(player.getLocation());
                     if (npc != null) {
                         String mapPiece = npc.interact();
                         System.out.println("You interacted with " + npc.getIdCharacter() + " and received: " + mapPiece);
