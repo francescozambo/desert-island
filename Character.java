@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Character {
+public class Character implements Serializable{
 	private String idCharacter;
 	private int maxHealth;
 	private int health;

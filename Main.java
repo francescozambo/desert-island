@@ -1,9 +1,18 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
        
-    	DesertIsland island = new DesertIsland();
+    	 DesertIsland island = new DesertIsland();
+    	 
+    	 try {
+			FileOutputStream file = new FileOutputStream("file.txt");
+			ObjectOutputStream output = new ObjectOutputStream(file);
+			output.writeObject(island);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
       
     	 // Create player
         Player player = new Player("Castaway", 100, 10);
@@ -115,6 +124,8 @@ public class Main {
         scanner.close();
     }
 
+    //Commands
+    
     private static void displayCommands() {
         System.out.println("Available commands:");
         System.out.println("look - Look around the room");

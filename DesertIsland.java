@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class DesertIsland {
+public class DesertIsland implements Serializable {
 	
 	// Create rooms
     Room beach;

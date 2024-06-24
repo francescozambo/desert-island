@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.HashMap;
 //import java.util.Iterator;
 
-public class Room {
+public class Room implements Serializable{
 	private String idRoom;
 	private HashMap<Item,Integer> roomItem; 
 	private HashMap<String, Room> connectedRoom;

@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Item {
+public class Item  implements Serializable{
 	private String idItem;
 	private int weight;
 	private boolean pick;     //indica se l'oggetto può essere raccolto o no
