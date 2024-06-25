@@ -27,10 +27,7 @@ public class Game {
 	public void play() throws IOException{
 		Scanner scanner = new Scanner(System.in);
         boolean playing = true;
-
-        // Display commands
         displayCommands();
-
         while (playing) {
             Room currentRoom = player.getLocation();
             System.out.println("\nYou are in " + currentRoom.getIdRoom());
@@ -163,10 +160,7 @@ public class Game {
 		}
 		
 	}
-
-    //Commands
-    
-    private static void displayCommands() {
+	private static void displayCommands() {				//Stampa i comandi del gioco 
         System.out.println("Available commands:");
         System.out.println("look - Look around the room");
         System.out.println("move - Move to another room");
