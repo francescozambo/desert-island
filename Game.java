@@ -5,13 +5,13 @@ public class Game {
 	DesertIsland island=null; 
 	Player player=null; 
 	
-	Game(){
+	Game(){																//Caso nuova partita;
 		island = new DesertIsland();
 		player = new Player("Castaway", 100, 10);
 		player.movePlayer(island.getStartRoom());
 		
 	}
-	Game(int x) throws IOException, ClassNotFoundException{
+	Game(int x) throws IOException, ClassNotFoundException{				//Caso gioco "caricato";
 		
 		try {
 			FileInputStream file = new FileInputStream("file.txt");
@@ -116,22 +116,19 @@ public class Game {
                         System.out.println("No NPC here.");
                     }
                     break;
-                case "quit":
+                case "exit":
                     playing = false;
                     System.out.println("Thank you for playing!");
                     break;
+                case "save":
+                	saveGame();
+                	System.out.println("Partita salvata");
+                	break;
+                	
                 default:
                     System.out.println("Invalid command, try again.");
                     displayCommands();
             }
-             try {
-			FileOutputStream file = new FileOutputStream("file.txt");
-			ObjectOutputStream output = new ObjectOutputStream(file);
-			output.writeObject(island);
-			output.writeObject(player);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
         }
 
         scanner.close();
@@ -141,6 +138,30 @@ public class Game {
 		System.out.println("Player Helath: "+player.getHealth()+"/"+player.getMaxHealth());
 		System.out.print("Player Inventory: ");
 		player.getInventory().showInventory();
+	}
+	
+	/*/
+	
+	public void resetGame() {
+		try {
+			PrintWriter reset = new PrintWriter(new File("file.txt"));
+			reset.print(" ");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	/*/
+	
+	private void saveGame() throws IOException {
+		try {
+			FileOutputStream file = new FileOutputStream("file.txt");
+			ObjectOutputStream output = new ObjectOutputStream(file);
+			output.writeObject(island);
+			output.writeObject(player);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
     //Commands
@@ -155,7 +176,8 @@ public class Game {
         System.out.println("drop - Drop an item");
         System.out.println("interact - Interact with an NPC");
         System.out.println("back -Go back to the previous room");
-        System.out.println("quit - Quit the game");
+        System.out.println("exit - Quit the game");
+        System.out.println("save - save the game");
     }
 	}
 
