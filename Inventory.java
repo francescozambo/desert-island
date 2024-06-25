@@ -52,7 +52,6 @@ public class Inventory implements Serializable {
         }	
 	}
 	public void showInventory() {		//visualizza tutto l'inventario	(item con quantità)										
-		System.out.println("INVENTORY:");
 			for (Item key : backpack.keySet()) {
 				int value = backpack.get(key);
 				System.out.println(key.getidItem() + ": " + value);
