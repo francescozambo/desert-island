@@ -12,16 +12,13 @@ public class Game {
 		
 	}
 	Game(int x) throws IOException, ClassNotFoundException{				//Caso gioco "caricato";
-		
-		try {
 			FileInputStream file = new FileInputStream("file.txt");
 			ObjectInputStream input = new ObjectInputStream(file);
 			island = (DesertIsland)input.readObject();
 			player = (Player) input.readObject();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
+	}
+	Game(int x, int y){
+		deleteFile("file.txt");
 	}
 	
 	public void play() throws IOException{
@@ -136,19 +133,6 @@ public class Game {
 		System.out.print("Player Inventory: ");
 		player.getInventory().showInventory();
 	}
-	
-	/*/
-	
-	public void resetGame() {
-		try {
-			PrintWriter reset = new PrintWriter(new File("file.txt"));
-			reset.print(" ");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	/*/
-	
 	private void saveGame() throws IOException {
 		try {
 			FileOutputStream file = new FileOutputStream("file.txt");
@@ -160,6 +144,20 @@ public class Game {
 		}
 		
 	}
+	
+	public static void deleteFile(String filePath) {
+        File file = new File(filePath);
+        if (file.exists()) {
+            if (file.delete()) {
+                System.out.println("File eliminato con successo: " + filePath);
+            } else {
+                System.out.println("Errore durante l'eliminazione del file: " + filePath);
+            }
+        } else {
+            System.out.println("Il file non esiste: " + filePath);
+        }
+    }
+	
 	private static void displayCommands() {				//Stampa i comandi del gioco 
         System.out.println("Available commands:");
         System.out.println("look - Look around the room");

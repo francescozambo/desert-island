@@ -12,7 +12,7 @@ public class Player extends Character {
 		inventory=new Inventory();
 	}
 	
-	public void movePlayer(Room r) {//sposta il giocatore in un'altra room
+	public void movePlayer(Room r) {			//sposta il giocatore in un'altra stanza
 	if (actualLocation != null) {
 		previousLocation = actualLocation;
 	}
