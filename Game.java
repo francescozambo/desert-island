@@ -151,12 +151,12 @@ public class Game {
         File file = new File(filePath);
         if (file.exists()) {
             if (file.delete()) {
-                System.out.println("File eliminato con successo: " + filePath);
+                System.out.println("File " +filePath+ " successfully deleted");
             } else {
-                System.out.println("Errore durante l'eliminazione del file: " + filePath);
+                System.out.println("An error occured ");
             }
         } else {
-            System.out.println("Il file non esiste: " + filePath);
+            System.out.println(filePath+"doesn't exist");
         }
     }
 	
