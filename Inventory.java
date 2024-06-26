@@ -24,6 +24,15 @@ public class Inventory implements Serializable {
 		//return backpack.containsKey(i);
 	}
 	
+	public Item getItemById(String id) {
+        for (Item item : backpack.keySet()) {
+            if (item.getidItem().equalsIgnoreCase(id)) {
+                return item;
+            }
+        }
+        return null; 
+    }
+	
 	public void removeItem(Item i, int q) {
 		if (!findItem(i)) {
             System.out.println("Nothing to remove");
@@ -58,11 +67,21 @@ public class Inventory implements Serializable {
 			}
 		System.out.println("PESO INVENTARIO: " + weight);
 	}
-	public boolean isFull(int x){
+	public boolean isNotFull(int x){			//controlla se con un peso x aggiunto, l'inventario è pieno o no
 		return MAX_WEIGHT>weight+x;
 	}
 	public int getWeight(){
 		return weight;
+	}
+	public int getQuantity(Item x){				//restituisce la quantità di un dato item
+		if(findItem(x)) {
+		int w=backpack.get(x);
+		return w;
+		}
+		else {
+			System.out.println("Object is not in the backpack");
+			return -1;
+		}
 	}
 
 }

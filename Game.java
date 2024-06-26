@@ -61,44 +61,44 @@ public class Game {
                 case "pickup":
                     System.out.println("Enter the item name you want to pick up:");
                     String itemNameToPick = scanner.nextLine();
-                    boolean itemFound= false;
-                    for (Item item : currentRoom.getRoomItems().keySet()) {
-                        if (item.getidItem().equalsIgnoreCase(itemNameToPick)) {
-                        	itemFound = true;
+                    Item itemFound= player.getLocation().getItemById(itemNameToPick);
+                    	if(itemFound!=null) {
                             System.out.println("Enter quantity:");
                             int quantityToPick = scanner.nextInt();
                             scanner.nextLine(); // Consume newline
-                            if (currentRoom.getRoomItems().get(item) >= quantityToPick) {
-                                player.getInventory().addItem(item, quantityToPick);
-                                if(player.getInventory().isFull(quantityToPick*item.getWeight())) {
-                                currentRoom.removeItem(item, quantityToPick);
+                            if (currentRoom.getRoomItems().get(itemFound) >= quantityToPick) {
+                                player.getInventory().addItem(itemFound, quantityToPick);
+                                if(player.getInventory().isNotFull(quantityToPick*itemFound.getWeight())) {
+                                currentRoom.removeItem(itemFound, quantityToPick);
                                 }
                             } else {
                                 System.out.println("Not enough items in the room.");
                             }
                             break;
-                        }
+                        
                     }
-                    if (!itemFound) {
+                    else {
                         System.out.println("Item not found in the room.");
                     }
                     break;
                 case "drop":
                     System.out.println("Enter the item name you want to drop:");
                     String itemNameToDrop = scanner.nextLine();
-                    boolean itemDropped = false;
-                    for (Item item : player.getInventory().getBackpack().keySet()) {
-                        if (item.getidItem().equalsIgnoreCase(itemNameToDrop)) {
+                    Item itemDropped = player.getInventory().getItemById(itemNameToDrop);
+                        if (itemDropped!=null) {
                             System.out.println("Enter quantity:");
                             int quantityToDrop = scanner.nextInt();
                             scanner.nextLine(); // Consume newline
-                            player.getInventory().removeItem(item, quantityToDrop);
-                            currentRoom.addItem(item, quantityToDrop);
-                            itemDropped = true;
+                            if(player.getInventory().getQuantity(itemDropped)>=quantityToDrop) {
+                            player.getInventory().removeItem(itemDropped, quantityToDrop);
+                            currentRoom.addItem(itemDropped, quantityToDrop);
+                            }
+                            else {
+                            	System.out.println("you don't have enough item in your inventory:");
+                            }
                             break;
-                        }
                     }
-                    if (!itemDropped) {
+                    else{
                         System.out.println("Item not found in inventory.");
                     }
                     break;
@@ -156,11 +156,11 @@ public class Game {
                 System.out.println("An error occured ");
             }
         } else {
-            System.out.println(filePath+"doesn't exist");
+            System.out.println(filePath+" doesn't exist");
         }
     }
 	
-	private static void displayCommands() {				//Stampa i comandi del gioco 
+	private static void displayCommands() {							//Stampa i comandi del gioco 
         System.out.println("Available commands:");
         System.out.println("look - Look around the room");
         System.out.println("move - Move to another room");
