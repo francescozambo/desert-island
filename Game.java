@@ -61,23 +61,25 @@ public class Game {
                 case "pickup":
                     System.out.println("Enter the item name you want to pick up:");
                     String itemNameToPick = scanner.nextLine();
-                    boolean itemPicked = false;
+                    boolean itemFound= false;
                     for (Item item : currentRoom.getRoomItems().keySet()) {
                         if (item.getidItem().equalsIgnoreCase(itemNameToPick)) {
+                        	itemFound = true;
                             System.out.println("Enter quantity:");
                             int quantityToPick = scanner.nextInt();
                             scanner.nextLine(); // Consume newline
                             if (currentRoom.getRoomItems().get(item) >= quantityToPick) {
-                                currentRoom.removeItem(item, quantityToPick);
                                 player.getInventory().addItem(item, quantityToPick);
-                                itemPicked = true;
+                                if(player.getInventory().isFull(quantityToPick*item.getWeight())) {
+                                currentRoom.removeItem(item, quantityToPick);
+                                }
                             } else {
                                 System.out.println("Not enough items in the room.");
                             }
                             break;
                         }
                     }
-                    if (!itemPicked) {
+                    if (!itemFound) {
                         System.out.println("Item not found in the room.");
                     }
                     break;

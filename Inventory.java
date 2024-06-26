@@ -58,8 +58,8 @@ public class Inventory implements Serializable {
 			}
 		System.out.println("PESO INVENTARIO: " + weight);
 	}
-	public boolean isFull(){
-		return weight==MAX_WEIGHT;
+	public boolean isFull(int x){
+		return MAX_WEIGHT>weight+x;
 	}
 	public int getWeight(){
 		return weight;
