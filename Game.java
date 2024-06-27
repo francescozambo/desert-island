@@ -40,6 +40,9 @@ public class Game {
                 case "look":
                     currentRoom.showItems();
                     break;
+                case "help":
+                	displayCommands();
+                	break;
                 case "back":
                     Room lastRoom = player.getLastLocation();
                     if (lastRoom != null) {
@@ -206,6 +209,7 @@ public class Game {
         System.out.println("back --> Go back to the previous room");
         System.out.println("exit --> Quit the game");
         System.out.println("save --> save the game");
+        System.out.println("help --> show commands");
     }
 	private static String[] splitCommand(String s) {
 		final int maxWord =3;
