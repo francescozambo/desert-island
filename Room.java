@@ -76,14 +76,16 @@ public class Room implements Serializable{
 			System.out.println(key.getidItem()+": "+value);
 		}
 		*/
+		if(roomItem.isEmpty()) {
+			System.out.println("There is nothing in this room");
+		}
+		else {
 		System.out.println("OGGETTI NELLA STANZA:");
 		for (Item key : roomItem.keySet()) {
 			int value = roomItem.get(key);
 			System.out.println(key.getidItem() + ": " + value);
 		}
-
-		
-		
+		}
 	}
 	public void connectRoom(Room n, Room s, Room e, Room w){		//metodo per connettere le varie stanze
 		if (n != null) connectedRoom.put("north", n);

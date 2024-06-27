@@ -60,15 +60,21 @@ public class Inventory implements Serializable {
             System.out.println("Object added in your inventory");
         }	
 	}
-	public void showInventory() {		//visualizza tutto l'inventario	(item con quantità)										
+	public void showInventory() {		//visualizza tutto l'inventario	(item con quantità)	
+		if(backpack.isEmpty()) {
+			System.out.println("The inventory is empty");
+		}
+		else {
 			for (Item key : backpack.keySet()) {
 				int value = backpack.get(key);
 				System.out.println(key.getidItem() + ": " + value);
 			}
+		}
 		System.out.println("PESO INVENTARIO: " + weight);
 	}
-	public boolean isNotFull(int x){			//controlla se con un peso x aggiunto, l'inventario è pieno o no
-		return MAX_WEIGHT>weight+x;
+	public boolean isFull(int x){			//controlla se con un peso x aggiunto, l'inventario è pieno o no
+		return weight+x>MAX_WEIGHT;
+
 	}
 	public int getWeight(){
 		return weight;

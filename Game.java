@@ -108,10 +108,12 @@ public class Game {
                             int quantityToPick = Integer.parseInt(words[2]);
                            // scanner.nextLine(); // Consume newline
                             if (currentRoom.getRoomItems().get(itemFound) >= quantityToPick) {
-                                player.getInventory().addItem(itemFound, quantityToPick);
-                                if(!player.getInventory().isNotFull(quantityToPick*itemFound.getWeight())) {
+                            	
+                                if(player.getInventory().isFull(itemFound.getWeight()*quantityToPick)==false) {
+                               
                                 currentRoom.removeItem(itemFound, quantityToPick);
                                 }
+                                player.getInventory().addItem(itemFound, quantityToPick);
                             } else {
                                 System.out.println("Not enough items in the room.");
                             }
