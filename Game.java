@@ -65,6 +65,7 @@ public class Game {
                 case "save":
                 	saveGame();
                 	System.out.println("Partita salvata");
+                	printStatusGame();
                 	break;
                 default:
                     System.out.println("Invalid command, try again.");
@@ -154,12 +155,14 @@ public class Game {
     }
         scanner.close();
 	}
-	public void printStatusGame() {
+	
+	private void printStatusGame() {
 		System.out.println("Player Room: "+player.getLocation().getIdRoom());
-		System.out.println("Player Helath: "+player.getHealth()+"/"+player.getMaxHealth());
+		System.out.println("Player Health: "+player.getHealth()+"/"+player.getMaxHealth());
 		System.out.print("Player Inventory: ");
 		player.getInventory().showInventory();
 	}
+	
 	private void saveGame() throws IOException {
 		try {
 			FileOutputStream file = new FileOutputStream("file.txt");

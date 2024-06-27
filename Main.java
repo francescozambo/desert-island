@@ -11,14 +11,12 @@ public class Main {
     		if(x.equalsIgnoreCase("new")) {
     		game=new Game();	//NUOVO GIOCO
     		game.play();
-    		game.printStatusGame();
     		}
     		else if(x.equalsIgnoreCase("continue")){		//CONTINUAZIONE GIOCO PRECEDENTE
     			try {
     			game=new Game(1);
     			System.out.println("WELCOME BACK");
         		game.play();
-        		game.printStatusGame();
     			}
     			catch(FileNotFoundException e){
     				System.out.println("File not found...start a new game instead");
