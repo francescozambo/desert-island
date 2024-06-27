@@ -3,15 +3,15 @@ import java.io.Serializable;
 public class DesertIsland implements Serializable {
 	
 	// Create rooms
-    Room beach;
-    Room forest;
-    Room cave;
-    Room ocean;
+	private Room beach;
+    private Room forest;
+    private Room cave;
+    private Room ocean;
 	
   
-    Item food;
-    Item wood;
-    Item stone;
+    private Item food;
+    private Item wood;
+    private Item stone;
     
     
     
