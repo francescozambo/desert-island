@@ -48,7 +48,7 @@ public class Player extends Character {
 	public void showMap() {
 		if(mapPieces>0) {
 		for(int i=0; i<nMap; i++) {
-			if(map!=null)
+			if(map[i]!=null)
 				System.out.print(map[i]+" ");
 			else
 				System.out.print("------");

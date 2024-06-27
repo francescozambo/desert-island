@@ -36,7 +36,7 @@ public class Story {
 					else if(t==(y/2+2)) {
 						player.getMapString(npc.interact(),4);
 						System.out.println("YOU FOUND A MAP PIECE!...It says: "+npc.interact()+"\nYou have now "
-								+player.returnNMapPieces()+"/"+player.returnNTMapPieces()+"Map pieces\n");
+								+player.returnNMapPieces()+"/"+player.returnNTMapPieces()+" Map pieces\n");
 						
 					}
 					else {
