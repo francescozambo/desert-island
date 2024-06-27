@@ -80,9 +80,10 @@ public class Game {
             }
             }
             else if(words.length==2) {
-            	if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
+		 
             	switch(words[0]) {
                 case "move":
+		 if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
                     String direction = words[1];
                     Room newRoom = currentRoom.returnRoom(direction);
                     if (newRoom != null) {
@@ -91,16 +92,19 @@ public class Game {
                     } else {
                         System.out.println("You can't go that way.");
                     }
-                    break;
-                default:
-                    System.out.println("Invalid command, try again.");
-                    displayCommands();
-            	}
-            }
+		}
             	else {
             		System.out.println("Invalid command, try again.");
                     displayCommands();
             	}
+                    break;
+			case "use": 
+				
+                default:
+                    System.out.println("Invalid command, try again.");
+                    displayCommands();
+            	}
+            
             }
             else {
                 switch(words[0]) {
