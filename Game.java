@@ -30,21 +30,11 @@ public class Game {
             System.out.println("\nYou are in " + currentRoom.getIdRoom());
             System.out.print("> ");
             String command = scanner.nextLine().trim().toLowerCase();
-
-            switch (command) {
+            String words[] = splitCommand(command);
+            if(words.length==1) {
+            switch (words[0]) {
                 case "look":
                     currentRoom.showItems();
-                    break;
-                case "move":
-                    System.out.println("Where would you like to go? (north/south/east/west)");
-                    String direction = scanner.nextLine();
-                    Room newRoom = currentRoom.returnRoom(direction);
-                    if (newRoom != null) {
-                        player.movePlayer(newRoom);
-                        System.out.println("You moved to " + newRoom.getIdRoom());
-                    } else {
-                        System.out.println("You can't go that way.");
-                    }
                     break;
                 case "back":
                     Room lastRoom = player.getLastLocation();
@@ -55,17 +45,67 @@ public class Game {
                         System.out.println("You have no previous room to go back to.");
                     }
                     break;
-                case "inventory":
-                   player.getInventory().showInventory();
+                case "interact":
+                    NPC npc = null;
+                    npc=island.getRoomNPC(player.getLocation());
+                    if (npc != null) {
+                        String mapPiece = npc.interact();
+                        System.out.println("You interacted with " + npc.getIdCharacter() + " and received: " + mapPiece);
+                    } else {
+                        System.out.println("No NPC here.");
+                    }
                     break;
+                case "inventory":
+                    player.getInventory().showInventory();
+                     break;
+                case "exit":
+                    playing = false;
+                    System.out.println("Thank you for playing!");
+                    break;
+                case "save":
+                	saveGame();
+                	System.out.println("Partita salvata");
+                	break;
+                default:
+                    System.out.println("Invalid command, try again.");
+                    displayCommands();
+            }
+            }
+            else if(words.length==2) {
+            	if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
+            	switch(words[0]) {
+                case "move":
+                    String direction = words[1];
+                    Room newRoom = currentRoom.returnRoom(direction);
+                    if (newRoom != null) {
+                        player.movePlayer(newRoom);
+                       // System.out.println("You moved to " + newRoom.getIdRoom());
+                    } else {
+                        System.out.println("You can't go that way.");
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid command, try again.");
+                    displayCommands();
+            	}
+            }
+            	else {
+            		System.out.println("Invalid command, try again.");
+                    displayCommands();
+            	}
+            }
+            else {
+                switch(words[0]) {
                 case "pickup":
-                    System.out.println("Enter the item name you want to pick up:");
-                    String itemNameToPick = scanner.nextLine();
+                   // System.out.println("Enter the item name you want to pick up:");
+                   // String itemNameToPick = scanner.nextLine();
+                    String itemNameToPick = words[1];
                     Item itemFound= player.getLocation().getItemById(itemNameToPick);
                     	if(itemFound!=null) {
-                            System.out.println("Enter quantity:");
-                            int quantityToPick = scanner.nextInt();
-                            scanner.nextLine(); // Consume newline
+                            //System.out.println("Enter quantity:");
+                           // int quantityToPick = scanner.nextInt();
+                            int quantityToPick = Integer.parseInt(words[2]);
+                           // scanner.nextLine(); // Consume newline
                             if (currentRoom.getRoomItems().get(itemFound) >= quantityToPick) {
                                 player.getInventory().addItem(itemFound, quantityToPick);
                                 if(!player.getInventory().isNotFull(quantityToPick*itemFound.getWeight())) {
@@ -81,14 +121,16 @@ public class Game {
                         System.out.println("Item not found in the room.");
                     }
                     break;
-                case "drop":
-                    System.out.println("Enter the item name you want to drop:");
-                    String itemNameToDrop = scanner.nextLine();
+                	case "drop":
+                    //System.out.println("Enter the item name you want to drop:");
+                    //String itemNameToDrop = scanner.nextLine();
+                    String itemNameToDrop = words[1];
                     Item itemDropped = player.getInventory().getItemById(itemNameToDrop);
                         if (itemDropped!=null) {
-                            System.out.println("Enter quantity:");
-                            int quantityToDrop = scanner.nextInt();
-                            scanner.nextLine(); // Consume newline
+                           // System.out.println("Enter quantity:");
+                           // int quantityToDrop = scanner.nextInt();
+                            int quantityToDrop = Integer.parseInt(words[2]);
+                          //  scanner.nextLine(); // Consume newline
                             if(player.getInventory().getQuantity(itemDropped)>=quantityToDrop) {
                             player.getInventory().removeItem(itemDropped, quantityToDrop);
                             currentRoom.addItem(itemDropped, quantityToDrop);
@@ -102,33 +144,16 @@ public class Game {
                         System.out.println("Item not found in inventory.");
                     }
                     break;
-                case "interact":
-                    NPC npc = null;
-                    npc=island.getRoomNPC(player.getLocation());
-                    if (npc != null) {
-                        String mapPiece = npc.interact();
-                        System.out.println("You interacted with " + npc.getIdCharacter() + " and received: " + mapPiece);
-                    } else {
-                        System.out.println("No NPC here.");
-                    }
-                    break;
-                case "exit":
-                    playing = false;
-                    System.out.println("Thank you for playing!");
-                    break;
-                case "save":
-                	saveGame();
-                	System.out.println("Partita salvata");
-                	break;
-                	
                 default:
                     System.out.println("Invalid command, try again.");
                     displayCommands();
             }
         }
 
-        scanner.close();
+        
     }
+        scanner.close();
+	}
 	public void printStatusGame() {
 		System.out.println("Player Room: "+player.getLocation().getIdRoom());
 		System.out.println("Player Helath: "+player.getHealth()+"/"+player.getMaxHealth());
@@ -162,16 +187,32 @@ public class Game {
 	
 	private static void displayCommands() {							//Stampa i comandi del gioco 
         System.out.println("Available commands:");
-        System.out.println("look - Look around the room");
-        System.out.println("move - Move to another room");
-        System.out.println("back - Go back to the last room");
-        System.out.println("inventory - Show your inventory");
-        System.out.println("pickup - Pick up an item");
-        System.out.println("drop - Drop an item");
-        System.out.println("interact - Interact with an NPC");
-        System.out.println("back -Go back to the previous room");
-        System.out.println("exit - Quit the game");
-        System.out.println("save - save the game");
+        System.out.println("look --> Look around the room");
+        System.out.println("move + direction (north/south/west/east) --> Move to another room in the chosen direction");
+        System.out.println("back --> Go back to the last room");
+        System.out.println("inventory --> Show your inventory");
+        System.out.println("pickup + item name + quantity --> Pick up an item");
+        System.out.println("drop --> Drop an item");
+        System.out.println("interact --> Interact with an NPC");
+        System.out.println("back --> Go back to the previous room");
+        System.out.println("exit --> Quit the game");
+        System.out.println("save --> save the game");
     }
+	private static String[] splitCommand(String s) {
+		final int maxWord =3;
+		String[] x = s.split(" ");
+		if(x.length<=maxWord) {
+		return x;
+		}
+		else {
+			x= new String[maxWord];
+			for (int i = 0; i < x.length; i++) {
+	            x[i] = " ";
+	        }
+			return x;
+		}
 	}
+	}
+
+
 
