@@ -4,10 +4,15 @@ import java.util.Scanner;
 public class Game {
 	DesertIsland island=null; 
 	Player player=null; 
-	
+	Story story = new Story();
 	Game(){																//Caso nuova partita;
 		island = new DesertIsland();
-		player = new Player("Castaway", 100, 10);
+		System.out.println("What's your name?");
+		Scanner scanner = new Scanner (System.in);
+		String x = scanner.nextLine();
+		scanner.close();
+		player = new Player(x, 100, 10);
+		story.beginnin(player.getIdCharacter());
 		player.movePlayer(island.getStartRoom());
 		
 	}

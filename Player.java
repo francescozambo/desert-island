@@ -17,7 +17,7 @@ public class Player extends Character {
 		previousLocation = actualLocation;
 	}
 	actualLocation = r;
-		System.out.println("You've arrived in the: "+actualLocation.getIdRoom());
+		//System.out.println("You've arrived in the: "+actualLocation.getIdRoom());
 	}
 	
 	public Room getLocation() {
