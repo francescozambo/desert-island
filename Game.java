@@ -68,7 +68,7 @@ public class Game {
                             scanner.nextLine(); // Consume newline
                             if (currentRoom.getRoomItems().get(itemFound) >= quantityToPick) {
                                 player.getInventory().addItem(itemFound, quantityToPick);
-                                if(player.getInventory().isNotFull(quantityToPick*itemFound.getWeight())) {
+                                if(!player.getInventory().isNotFull(quantityToPick*itemFound.getWeight())) {
                                 currentRoom.removeItem(itemFound, quantityToPick);
                                 }
                             } else {
