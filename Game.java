@@ -10,7 +10,6 @@ public class Game {
 		System.out.println("What's your name?");
 		Scanner scanner = new Scanner (System.in);
 		String x = scanner.nextLine();
-		scanner.close();
 		player = new Player(x, 100, 10);
 		story.beginnin(player.getIdCharacter());
 		player.movePlayer(island.getStartRoom());
