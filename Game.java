@@ -40,6 +40,9 @@ public class Game {
                 case "look":
                     currentRoom.showItems();
                     break;
+                case "map":
+                	player.showMap();
+                	break;
                 case "help":
                 	displayCommands();
                 	break;
@@ -55,10 +58,33 @@ public class Game {
                 case "interact":
                     NPC npc = null;
                     npc=island.getRoomNPC(player.getLocation());
+                    Room room = player.getLocation();
                     if (npc != null) {
-                        String mapPiece = npc.interact();
-                        System.out.println("You interacted with " + npc.getIdCharacter() + " and received: " + mapPiece);
-                    } else {
+                    	if(npc.getInteract()==false) {	//quando non si ha mai interagito prima con un npc
+                    		try{
+                        	switch(room.getIdRoom()) {
+                        	case "Beach": 
+                        		story.firtsInteractionBeach(island, player, npc);
+                        		break;
+                        	case "Ocean":
+                        		break;
+                        	case "Forest":
+                        		break;
+                        	case "Cave":
+                        		break;
+                        	default: 
+                        		throw new IllegalArgumentException("Unknown room");
+                        	}
+                        	}
+                    		catch(IllegalArgumentException e) {
+                    			System.err.println("ERROR");
+                    		}
+                        }
+                    	else {
+                    		 System.out.println(npc.getIdCharacter().toUpperCase()+": I have nothing to say");
+                    	}
+                    } 
+                    else {
                         System.out.println("No NPC here.");
                     }
                     break;
@@ -164,7 +190,9 @@ public class Game {
             }
         }
 
-        
+        if(player.allMap()==true) {
+        	playing=false;
+        }
     }
         scanner.close();
 	}
@@ -172,7 +200,7 @@ public class Game {
 	private void printStatusGame() {
 		System.out.println("Player Room: "+player.getLocation().getIdRoom());
 		System.out.println("Player Health: "+player.getHealth()+"/"+player.getMaxHealth());
-		System.out.print("Player Inventory: ");
+		System.out.println("Player Inventory: ");
 		player.getInventory().showInventory();
 	}
 	
@@ -214,6 +242,7 @@ public class Game {
         System.out.println("exit --> Quit the game");
         System.out.println("save --> save the game");
         System.out.println("help --> show commands");
+        System.out.println("map --> show map");
     }
 	private static String[] splitCommand(String s) {
 		final int maxWord =3;

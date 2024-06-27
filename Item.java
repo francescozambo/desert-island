@@ -11,6 +11,11 @@ public class Item  implements Serializable{
 		weight = y;	
 		pick = p;
 	}
+	Item(String x){
+		idItem = x;
+		weight = 100;	
+		pick = false;
+	}
 	
 	int getWeight() {
 		return weight;
@@ -20,6 +25,9 @@ public class Item  implements Serializable{
 	}
 	boolean isPickable() {
 		return pick;
+	}
+	void useItem() {
+		System.out.println("The item was used");
 	}
 }
 

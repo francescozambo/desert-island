@@ -7,7 +7,7 @@ public class Room implements Serializable{
 	private HashMap<Item,Integer> roomItem; 
 	private HashMap<String, Room> connectedRoom;
 	private NPC npc;
-
+	private boolean visited=false;
 	Room(String name){
 		idRoom = name;
 		roomItem = new HashMap<Item,Integer>();
@@ -25,7 +25,9 @@ public class Room implements Serializable{
 	public boolean findItem(Item x) {
 		return roomItem.containsKey(x);
 	}
-	
+	public int getItemQuantity(Item x) {
+		return roomItem.get(x);
+	}
 	public Item getItemById(String id) {				//restituisce l'oggetto a partire dal suo id, null altrimenti
         for (Item item : roomItem.keySet()) {
             if (item.getidItem().equalsIgnoreCase(id)) {
@@ -101,5 +103,11 @@ public class Room implements Serializable{
 	}
 	public NPC getNPC() {
 		return npc;
+	}
+	public boolean getVisited() {
+		return visited;
+	}
+	public void setVisisted() {
+		visited=true;
 	}
 }
