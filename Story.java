@@ -74,7 +74,34 @@ public class Story {
 		case "quit":
 			System.out.println(npc.getIdCharacter().toUpperCase()+": As you want, but I think we will see each other soon");
 			break;
-		case "start":
+		case "start": 
+			System.out.println(npc.getIdCharacter().toUpperCase()+": Let's start!");
+			for(int i=1;i<=3;i++) {
+				System.out.println(npc.getIdCharacter().toUpperCase()+": Here is the "+i+"° riddle: "+getRiddle(i-1));
+				String guess="";
+				do {
+					guess=in.nextLine();
+					tries=tries+1;
+					if(guess.equalsIgnoreCase(getRiddleAnswer(i))) {
+						tries=3;
+						riddleGuessed=riddleGuessed+1;
+						System.out.println(npc.getIdCharacter().toUpperCase()+": That's correct!");
+					}
+					else {
+						tries=tries+1;
+						System.out.println(npc.getIdCharacter().toUpperCase()+": Wrong answer");
+						if(tries>=3)
+							System.out.println(npc.getIdCharacter().toUpperCase()+": Ok, maybe this riddle is too difficult, let's do another one");
+					}
+				}
+				while(tries<3||guess.equalsIgnoreCase(getRiddleAnswer(i)));
+			}
+			if(riddleGuessed<=1) {
+				System.out.println(npc.getIdCharacter().toUpperCase()+": Ok, riddles are not your forte");
+			}
+			else {
+				System.out.println(npc.getIdCharacter().toUpperCase()+": You are good at riddles!");
+			}
 			break;
 		default:
 			System.out.println(npc.getIdCharacter().toUpperCase()+": Speak clear!");
@@ -89,5 +116,32 @@ public class Story {
 		int number=random.nextInt((max - 1) + 1) +1;
 		return number;
 	}
-	
+	private String getRiddle(int i) {
+		String[] riddles=new String[3];
+		riddles[0]="It cannot be seen, cannot be felt,\n"
+				+ "Cannot be heard, cannot be smelt.\n"
+				+ "It lies behind stars and under hills,\n"
+				+ "And empty holes it fills.\n"
+				+ "It comes out first and follows after,\n"
+				+ "Ends life, kills laughter.";
+		riddles[1]="Voiceless it cries,\n"
+				+ "Wingless flutters,\n"
+				+ "Toothless bites,\n"
+				+ "Mouthless mutters. \n";
+		riddles[2]="This thing all things devours;\n"
+				+ "Birds, beasts, trees, flowers;\n"
+				+ "Gnaws iron, bites steel;\n"
+				+ "Grinds hard stones to meal;\n"
+				+ "Slays king, ruins town,\n"
+				+ "And beats mountain down. \n"
+				+ "";
+		return riddles[i];
+	}
+	private String getRiddleAnswer(int i){
+		String[] riddles=new String[3];
+		riddles[0]="Dark";
+		riddles[1]="Wind";
+		riddles[2]="Time";
+		return riddles[i];
+	}
 }
