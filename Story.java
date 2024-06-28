@@ -62,6 +62,15 @@ public class Story {
 		}
 		
 	}
+	public void firstInteractionForest(DesertIsland ds,Player player, NPC npc){
+		
+	}
+	public void firstInteractionCave(DesertIsland ds,Player player, NPC npc){
+		
+	}
+	public void firstInteractionOcean(DesertIsland ds,Player player, NPC npc){
+		
+	}
 	private int  generateRandomNumber(int x) {					//genera numeri random da 1 a x
 		int max=x;
 		int number=random.nextInt((max - 1) + 1) +1;

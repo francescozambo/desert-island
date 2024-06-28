@@ -18,6 +18,9 @@ public class Character implements Serializable{
 	}
 	public void setHealth(int x) {
 		health = x;
+		if(health>=maxHealth){
+			health=maxHealth;
+		}
 	}
 	public String getIdCharacter() {
 		return idCharacter;

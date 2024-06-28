@@ -26,8 +26,8 @@ public class Item  implements Serializable{
 	boolean isPickable() {
 		return pick;
 	}
-	void useItem() {
-		System.out.println("The item was used");
+	public void useItem(Player player) {
+		System.out.println("You can't use this object");
 	}
 }
 

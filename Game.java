@@ -127,8 +127,15 @@ public class Game {
                     displayCommands();
             	}
                     break;
-			case "use": 
-				
+			case "use":
+				Item x = player.getInventory().getItemById(words[1]);
+				if(player.getInventory().findItem(x)==true){
+					x.useItem(player);
+				}
+				else {
+					System.out.println("You don't have that item");
+				}
+				break;
                 default:
                     System.out.println("Invalid command, try again.");
                     displayCommands();
@@ -252,6 +259,7 @@ public class Game {
         System.out.println("back --> Go back to the last room");
         System.out.println("pickup + item name + quantity --> Pick up an item");
         System.out.println("drop + item name + quantity --> Drop an item");
+        System.out.println("use + item name (food or weapon) --> use the weapon or eat 1 food");
         System.out.println("interact --> Interact with an NPC");
         System.out.println("exit --> Quit the game");
         System.out.println("save --> save the game");
