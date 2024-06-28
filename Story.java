@@ -89,4 +89,5 @@ public class Story {
 		int number=random.nextInt((max - 1) + 1) +1;
 		return number;
 	}
+	
 }
