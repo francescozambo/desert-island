@@ -1,10 +1,8 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Story {
+	Random random =new Random();
 	Story(){
 		
 	}
@@ -21,19 +19,25 @@ public class Story {
 			System.out.println("OLD SAILOR: Hello stranger! I think i lost my compass...I must had left it somewhere here and was covered by the sand\n"
 					+ "Can you help me find it? We just need to dig up these dunes...Type dig to use the showel");
 			Scanner in = new Scanner(System.in);
-			int y=player.getLocation().getItemQuantity(player.getLocation().getItemById("Dune"));
 			int t=0;
+			int map=0;
+			int compass=0;
+			do {																//rende la "ricerca" randomizzata in modo che a ogni giocata sia diversa;
+				map=generateRandomNumber(player.getLocation().getItemQuantity(player.getLocation().getItemById("Dune")));
+				compass=generateRandomNumber(player.getLocation().getItemQuantity(player.getLocation().getItemById("Dune")));
+			}
+			while((compass==map));
 			while(player.getLocation().findItem(player.getLocation().getItemById("Dune"))==true){
 				String x = in.nextLine();
 				if(x.equalsIgnoreCase("dig")) {
 					t=t+1;
 					player.getLocation().removeItem(player.getLocation().getItemById("Dune"), 1);
-					if(t==y/2) {
+					if(t==compass) {
 						System.out.println("OLD SAILOR: We found the compass...thanks for your help, i'll give you my knife");
 						Item i = new Item("Knife",4,true);
 						player.getLocation().addItem(i,1);
 					}
-					else if(t==(y/2+2)) {
+					else if(t==map) {
 						player.getMapString(npc.interact(),4);
 						System.out.println("YOU FOUND A MAP PIECE!...It says: "+npc.interact()+"\nYou have now "
 								+player.returnNMapPieces()+"/"+player.returnNTMapPieces()+" Map pieces\n");
@@ -47,12 +51,17 @@ public class Story {
 					System.out.println("OLD SAILOR: Help me, Lazybones!");
 				}
 			}
-			System.out.println("OLD SAILOR: Thank you for helping me");
+			System.out.println("OLD SAILOR: We dug up all the sand, thank you for helping me");
 			npc.setInteract();
 		}
 		else {
 			System.out.println("OLD SAILOR: Maybe you should come back when you have a showel");
 		}
 		
+	}
+	private int  generateRandomNumber(int x) {					//genera numeri random da 1 a x
+		int max=x;
+		int number=random.nextInt((max - 1) + 1) +1;
+		return number;
 	}
 }

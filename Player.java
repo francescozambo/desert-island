@@ -6,6 +6,7 @@ public class Player extends Character {
 	private Inventory inventory;
 	private int mapPieces=0;
 	final private  int nMap =4;
+	private Item weapon = null;
 	private String[] map = new String[nMap];
 
 	Player(String id, int mH,int d) {
@@ -57,6 +58,9 @@ public class Player extends Character {
 		else {
 			System.out.println("Yuo don't have a map piece");
 		}
+	}
+	public void setWeapon(Item x) {
+		
 	}
 
 }

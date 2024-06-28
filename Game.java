@@ -133,6 +133,7 @@ public class Game {
             
             }
             else {
+            	try {
                 switch(words[0]) {
                 case "pickup":
                    // System.out.println("Enter the item name you want to pick up:");
@@ -188,6 +189,15 @@ public class Game {
                     System.out.println("Invalid command, try again.");
                     displayCommands();
             }
+            	}
+            	catch(ArrayIndexOutOfBoundsException e){
+            		System.out.println("Invalid command");
+                    displayCommands();
+            	}
+            	catch(NumberFormatException e) {
+            		System.out.println("Invalid number format. Please enter a valid number.");
+                    displayCommands();
+            	}
         }
 
         if(player.allMap()==true) {
