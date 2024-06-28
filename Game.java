@@ -36,175 +36,16 @@ public class Game {
             String command = scanner.nextLine().trim().toLowerCase();
             String words[] = splitCommand(command);
             if(words.length==1) {
-            switch (words[0]) {
-                case "look":
-                    currentRoom.showItems();
-                    break;
-                case "player":
-                	player.printStatusPlayer();
-                	break;
-                case "map":
-                	player.showMap();
-                	break;
-                case "help":
-                	displayCommands();
-                	break;
-                case "back":
-                    Room lastRoom = player.getLastLocation();
-                    if (lastRoom != null) {
-                        player.movePlayer(lastRoom);
-                        System.out.println("You moved back to " + lastRoom.getIdRoom());
-                    } else {
-                        System.out.println("You have no previous room to go back to.");
-                    }
-                    break;
-                case "interact":
-                    NPC npc = null;
-                    npc=island.getRoomNPC(player.getLocation());
-                    Room room = player.getLocation();
-                    if (npc != null) {
-                    	if(npc.getInteract()==false) {	//quando non si ha mai interagito prima con un npc
-                    		try{
-                        	switch(room.getIdRoom()) {
-                        	case "Beach": 
-                        		story.firtsInteractionBeach(island, player, npc);
-                        		break;
-                        	case "Ocean":
-                        		break;
-                        	case "Forest":
-                        		break;
-                        	case "Cave":
-                        		story.firstInteractionCave(island, player, npc);
-                        		break;
-                        	default: 
-                        		throw new IllegalArgumentException("Unknown room");
-                        	}
-                        	}
-                    		catch(IllegalArgumentException e) {
-                    			System.err.println("ERROR");
-                    		}
-                        }
-                    	else {
-                    		 System.out.println(npc.getIdCharacter().toUpperCase()+": I have nothing to say");
-                    	}
-                    } 
-                    else {
-                        System.out.println("No NPC here.");
-                    }
-                    break;
-                case "inventory":
-                    player.getInventory().showInventory();
-                     break;
-                case "exit":
-                    playing = false;
-                    System.out.println("Thank you for playing!");
-                    break;
-                case "save":
-                	saveGame();
-                	System.out.println("GAME SAVED");
-                	printStatusGame();
-                	break;
-                default:
-                    System.out.println("Invalid command, try again.");
-                    displayCommands();
-            }
+            playing =process1WordCommand(currentRoom, words);
             }
             else if(words.length==2) {
 		 
-            	switch(words[0]) {
-                case "move":
-		 if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
-                    String direction = words[1];
-                    Room newRoom = currentRoom.returnRoom(direction);
-                    if (newRoom != null) {
-                        player.movePlayer(newRoom);
-                       // System.out.println("You moved to " + newRoom.getIdRoom());
-                    } else {
-                        System.out.println("You can't go that way.");
-                    }
-		}
-            	else {
-            		System.out.println("Invalid command, try again.");
-                    displayCommands();
-            	}
-                    break;
-			case "use":
-				Item x = player.getInventory().getItemById(words[1]);
-				if(player.getInventory().findItem(x)==true){
-					x.useItem(player);
-				}
-				else {
-					System.out.println("You don't have that item");
-				}
-				break;
-                default:
-                    System.out.println("Invalid command, try again.");
-                    displayCommands();
-            	}
+            playing=process2WordCommand(currentRoom, words);	
             
             }
             else {
-            	try {
-                switch(words[0]) {
-                case "pickup":
-                   // System.out.println("Enter the item name you want to pick up:");
-                   // String itemNameToPick = scanner.nextLine();
-                    String itemNameToPick = words[1];
-                    Item itemFound= player.getLocation().getItemById(itemNameToPick);
-                    	if(itemFound!=null) {
-                            //System.out.println("Enter quantity:");
-                           // int quantityToPick = scanner.nextInt();
-                            int quantityToPick = Integer.parseInt(words[2]);
-                           // scanner.nextLine(); // Consume newline
-                            if (currentRoom.getRoomItems().get(itemFound) >= quantityToPick) {
-                            	
-                                if(player.getInventory().isFull(itemFound.getWeight()*quantityToPick)==false) {
-                               
-                                currentRoom.removeItem(itemFound, quantityToPick);
-                                }
-                                player.getInventory().addItem(itemFound, quantityToPick);
-                            } else {
-                                System.out.println("Not enough items in the room.");
-                            }
-                            break;
-                        
-                    }
-                    else {
-                        System.out.println("Item not found in the room.");
-                    }
-                    break;
-                	case "drop":
-                    String itemNameToDrop = words[1];
-                    Item itemDropped = player.getInventory().getItemById(itemNameToDrop);
-                        if (itemDropped!=null) {
-                            int quantityToDrop = Integer.parseInt(words[2]);
-                            if(player.getInventory().getQuantity(itemDropped)>=quantityToDrop) {
-                            player.getInventory().removeItem(itemDropped, quantityToDrop);
-                            currentRoom.addItem(itemDropped, quantityToDrop);
-                            }
-                            else {
-                            	System.out.println("you don't have enough item in your inventory:");
-                            }
-                            break;
-                    }
-                    else{
-                        System.out.println("Item not found in inventory.");
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid command, try again.");
-                    displayCommands();
+            playing=process3WordCommand(currentRoom, words);
             }
-            	}
-            	catch(ArrayIndexOutOfBoundsException e){
-            		System.out.println("Invalid command");
-                    displayCommands();
-            	}
-            	catch(NumberFormatException e) {
-            		System.out.println("Invalid number format. Please enter a valid number.");
-                    displayCommands();
-            	}
-        }
 
         if(player.allMap()==true) {
         	playing=false;
@@ -263,6 +104,176 @@ public class Game {
         
     }
 	
+	private boolean process1WordCommand(Room currentRoom,String words[]) throws IOException {
+		switch (words[0]){
+        case "look":
+            currentRoom.showItems();
+            break;
+        case "player":
+        	player.printStatusPlayer();
+        	break;
+        case "map":
+        	player.showMap();
+        	break;
+        case "help":
+        	displayCommands();
+        	break;
+        case "back":
+            Room lastRoom = player.getLastLocation();
+            if (lastRoom != null) {
+                player.movePlayer(lastRoom);
+                System.out.println("You moved back to " + lastRoom.getIdRoom());
+            } else {
+                System.out.println("You have no previous room to go back to.");
+            }
+            break;
+        case "interact":
+            NPC npc = null;
+            npc=island.getRoomNPC(player.getLocation());
+            Room room = player.getLocation();
+            if (npc != null) {
+            	if(npc.getInteract()==false) {	//quando non si ha mai interagito prima con un npc
+            		try{
+                	switch(room.getIdRoom()) {
+                	case "Beach": 
+                		story.firtsInteractionBeach(island, player, npc);
+                		break;
+                	case "Ocean":
+                		break;
+                	case "Forest":
+                		break;
+                	case "Cave":
+                		story.firstInteractionCave(island, player, npc);
+                		break;
+                	default: 
+                		throw new IllegalArgumentException("Unknown room");
+                	}
+                	}
+            		catch(IllegalArgumentException e) {
+            			System.err.println("ERROR");
+            		}
+                }
+            	else {
+            		 System.out.println(npc.getIdCharacter().toUpperCase()+": I have nothing to say");
+            	}
+            } 
+            else {
+                System.out.println("No NPC here.");
+            }
+            break;
+        case "inventory":
+            player.getInventory().showInventory();
+             break;
+        case "exit":
+            System.out.println("Thank you for playing!");
+            return false;
+        case "save":
+        	saveGame();
+        	System.out.println("GAME SAVED");
+        	printStatusGame();
+        	break;
+        default:
+            System.out.println("Invalid command, try again.");
+            displayCommands();
+    }
+		return true;
+	}
+	private boolean process2WordCommand(Room currentRoom,String words[]) {
+		switch(words[0]) {
+        case "move":
+ if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
+            String direction = words[1];
+            Room newRoom = currentRoom.returnRoom(direction);
+            if (newRoom != null) {
+                player.movePlayer(newRoom);
+               // System.out.println("You moved to " + newRoom.getIdRoom());
+            } else {
+                System.out.println("You can't go that way.");
+            }
+}
+    	else {
+    		System.out.println("Invalid command, try again.");
+            displayCommands();
+    	}
+            break;
+	case "use":
+		Item x = player.getInventory().getItemById(words[1]);
+		if(player.getInventory().findItem(x)==true){
+			x.useItem(player);
+		}
+		else {
+			System.out.println("You don't have that item");
+		}
+		break;
+        default:
+            System.out.println("Invalid command, try again.");
+            displayCommands();
+    	}
+		return true;
+	}
+	private boolean process3WordCommand(Room currentRoom,String words[]) {
+    	try {
+            switch(words[0]) {
+            case "pickup":
+               // System.out.println("Enter the item name you want to pick up:");
+               // String itemNameToPick = scanner.nextLine();
+                String itemNameToPick = words[1];
+                Item itemFound= player.getLocation().getItemById(itemNameToPick);
+                	if(itemFound!=null) {
+                        //System.out.println("Enter quantity:");
+                       // int quantityToPick = scanner.nextInt();
+                        int quantityToPick = Integer.parseInt(words[2]);
+                       // scanner.nextLine(); // Consume newline
+                        if (currentRoom.getRoomItems().get(itemFound) >= quantityToPick) {
+                        	
+                            if(player.getInventory().isFull(itemFound.getWeight()*quantityToPick)==false) {
+                           
+                            currentRoom.removeItem(itemFound, quantityToPick);
+                            }
+                            player.getInventory().addItem(itemFound, quantityToPick);
+                        } else {
+                            System.out.println("Not enough items in the room.");
+                        }
+                        break;
+                    
+                }
+                else {
+                    System.out.println("Item not found in the room.");
+                }
+                break;
+            	case "drop":
+                String itemNameToDrop = words[1];
+                Item itemDropped = player.getInventory().getItemById(itemNameToDrop);
+                    if (itemDropped!=null) {
+                        int quantityToDrop = Integer.parseInt(words[2]);
+                        if(player.getInventory().getQuantity(itemDropped)>=quantityToDrop) {
+                        player.getInventory().removeItem(itemDropped, quantityToDrop);
+                        currentRoom.addItem(itemDropped, quantityToDrop);
+                        }
+                        else {
+                        	System.out.println("you don't have enough item in your inventory:");
+                        }
+                        break;
+                }
+                else{
+                    System.out.println("Item not found in inventory.");
+                }
+                break;
+            default:
+                System.out.println("Invalid command, try again.");
+                displayCommands();
+        }
+        	}
+        	catch(ArrayIndexOutOfBoundsException e){
+        		System.out.println("Invalid command");
+                displayCommands();
+        	}
+        	catch(NumberFormatException e) {
+        		System.out.println("Invalid number format. Please enter a valid number.");
+                displayCommands();
+        	}
+		return true;
+	}
 	private static String[] splitCommand(String s) {				//metodo che data una stringa la divide in parole
 		final int maxWord =3;
 		String[] x = s.split(" ");
