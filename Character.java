@@ -4,7 +4,7 @@ public class Character implements Serializable{
 	private String idCharacter;
 	private int maxHealth;
 	private int health;
-	private int damage; 
+	protected int damage; 
 	
 	Character(String id, int mH,int d){		//costruttore
 		idCharacter = id;

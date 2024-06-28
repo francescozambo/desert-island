@@ -58,8 +58,9 @@ public class Player extends Character {
 			System.out.println("You don't have any map piece");
 		}
 	}
-	public void setWeapon(Item x) {
-		
+	public void setWeapon(Weapon x) {
+		weapon =x;
+		damage=x.getDamage();
 	}
 	public Item getWeapon() {
 		return weapon;
