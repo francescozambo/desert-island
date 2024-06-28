@@ -74,6 +74,8 @@ public class Story {
 		case "quit":
 			System.out.println(npc.getIdCharacter().toUpperCase()+": As you want, but I think we will see each other soon");
 			break;
+		case "start":
+			break;
 		default:
 			System.out.println(npc.getIdCharacter().toUpperCase()+": Speak clear!");
 			break;
