@@ -74,6 +74,7 @@ public class Game {
                         	case "Forest":
                         		break;
                         	case "Cave":
+                        		story.firstInteractionCave(island, player, npc);
                         		break;
                         	default: 
                         		throw new IllegalArgumentException("Unknown room");

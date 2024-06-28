@@ -66,8 +66,18 @@ public class Story {
 	}
 	public void firstInteractionCave(DesertIsland ds,Player player, NPC npc){
 		int riddleGuessed=0;
-		System.out.println(npc.getIdCharacter().toUpperCase()+": Hello"+player.getIdCharacter()+"\n yeah i know your name, even though I'm down here all day, I know"
-				+ "everything about this island\nI've heard you are looking for a map piece...I have one, i can give it to you if you play riddles with me");
+		int tries=0;
+		System.out.println(npc.getIdCharacter().toUpperCase()+": Hello "+player.getIdCharacter()+"!\nYeah i know your name, even though I'm down here all day, I know"
+				+ "everything about this island\nI've heard you are looking for a map piece...I have one, i can give it to you if you play riddles with me\nLet's start or quit (typer start or quit)");
+		String answer=in.nextLine();
+		switch(answer) {
+		case "quit":
+			System.out.println(npc.getIdCharacter().toUpperCase()+": As you want, but I think we will see each other soon");
+			break;
+		default:
+			System.out.println(npc.getIdCharacter().toUpperCase()+": Speak clear!");
+			break;
+		}
 	}
 	public void firstInteractionOcean(DesertIsland ds,Player player, NPC npc){
 		
