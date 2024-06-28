@@ -178,10 +178,10 @@ public class Game {
     }
 		return true;
 	}
-	private boolean process2WordCommand(Room currentRoom,String words[]) {
+private boolean process2WordCommand(Room currentRoom,String words[]) {
 		switch(words[0]) {
         case "move":
- if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
+        	if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
             String direction = words[1];
             Room newRoom = currentRoom.returnRoom(direction);
             if (newRoom != null) {
@@ -190,17 +190,17 @@ public class Game {
             } else {
                 System.out.println("You can't go that way.");
             }
-}
-    	else {
-    		System.out.println("Invalid command, try again.");
-            displayCommands();
-    	}
-            break;
-	case "use":
-		Item x = player.getInventory().getItemById(words[1]);
-		if(player.getInventory().findItem(x)==true){
-			x.useItem(player);
-		}
+        	}	
+        	else {
+        		System.out.println("Invalid command, try again.");
+        		displayCommands();
+        	}
+        break;
+        case "use":
+        	Item x = player.getInventory().getItemById(words[1]);
+        	if(player.getInventory().findItem(x)==true){
+        		x.useItem(player);
+        	}
 		else {
 			System.out.println("You don't have that item");
 		}
@@ -215,15 +215,10 @@ public class Game {
     	try {
             switch(words[0]) {
             case "pickup":
-               // System.out.println("Enter the item name you want to pick up:");
-               // String itemNameToPick = scanner.nextLine();
                 String itemNameToPick = words[1];
                 Item itemFound= player.getLocation().getItemById(itemNameToPick);
                 	if(itemFound!=null) {
-                        //System.out.println("Enter quantity:");
-                       // int quantityToPick = scanner.nextInt();
                         int quantityToPick = Integer.parseInt(words[2]);
-                       // scanner.nextLine(); // Consume newline
                         if (currentRoom.getRoomItems().get(itemFound) >= quantityToPick) {
                         	
                             if(player.getInventory().isFull(itemFound.getWeight()*quantityToPick)==false) {
