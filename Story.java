@@ -3,8 +3,10 @@ import java.util.Scanner;
 
 public class Story {
 	Random random;
+	Scanner in = new Scanner(System.in);
 	Story(){
 		random = new Random();
+		
 	}
 	public void beginnin(String x) {
 		System.out.println("Hello "+x+"! \n\nYou are an adventurer who has woken up on the beach of an island that seems abandoned...\n"
@@ -13,9 +15,9 @@ public class Story {
 	
 	public void firtsInteractionBeach(DesertIsland ds,Player player, NPC npc) {
 		if(player.getInventory().findItem(player.getInventory().getItemById("Showel"))==true) {
-			System.out.println("OLD SAILOR: Hello stranger! I think i lost my compass...I must had left it somewhere here and was covered by the sand\n"
+			System.out.println(npc.getIdCharacter().toUpperCase()+": Hello stranger! I think i lost my compass...I must had left it somewhere here and was covered by the sand\n"
 					+ "Can you help me find it? We just need to dig up these dunes...Type dig to use the showel");
-			Scanner in = new Scanner(System.in);
+			
 			int t=0;
 			int map=0;
 			int compass=0;
@@ -30,7 +32,7 @@ public class Story {
 					t=t+1;
 					player.getLocation().removeItem(player.getLocation().getItemById("Dune"), 1);
 					if(t==compass) {
-						System.out.println("OLD SAILOR: We found the compass...thanks for your help, i'll give you my knife");
+						System.out.println(npc.getIdCharacter().toUpperCase()+": We found the compass...thanks for your help, i'll give you my knife");
 						Item i = new Item("Knife",4,true);
 						player.getLocation().addItem(i,1);
 					}
@@ -41,21 +43,21 @@ public class Story {
 						
 					}
 					else {
-						System.out.println("OLD SAILOR: Nothing...keep up");
+						System.out.println(npc.getIdCharacter().toUpperCase()+": Nothing...keep up");
 					}
 				}
 				else if(x.equalsIgnoreCase("save")){
 					System.out.println("You can not save now...help the old sailor first");
 				}
 				else {
-					System.out.println("OLD SAILOR: Help me, Lazybones!");
+					System.out.println(npc.getIdCharacter().toUpperCase()+": Help me, Lazybones!");
 				}
 			}
-			System.out.println("OLD SAILOR: We dug up all the sand, thank you for helping me");
+			System.out.println(npc.getIdCharacter().toUpperCase()+": We dug up all the sand, thank you for helping me!");
 			npc.setInteract();
 		}
 		else {
-			System.out.println("OLD SAILOR: Maybe you should come back when you have a showel");
+			System.out.println(npc.getIdCharacter().toUpperCase()+": Maybe you should come back when you have a showel!");
 		}
 		
 	}
@@ -63,7 +65,9 @@ public class Story {
 		
 	}
 	public void firstInteractionCave(DesertIsland ds,Player player, NPC npc){
-		
+		int riddleGuessed=0;
+		System.out.println(npc.getIdCharacter().toUpperCase()+": Hello"+player.getIdCharacter()+"\n yeah i know your name, even though I'm down here all day, I know"
+				+ "everything about this island\nI've heard you are looking for a map piece...I have one, i can give it to you if you play riddles with me");
 	}
 	public void firstInteractionOcean(DesertIsland ds,Player player, NPC npc){
 		
