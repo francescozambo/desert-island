@@ -4,9 +4,9 @@ import java.util.HashMap;
 public class Inventory implements Serializable {
 	private HashMap<Item,Integer> backpack;
 	private int weight;
-	private final static int MAX_WEIGHT=10;		//capienza massima inventario (per ora settata a 10);
+	private final static int MAX_WEIGHT=10;							//costante per memorizzare la capienza massima dell'inventario
 	
-	public Inventory() {			//costruttore
+	public Inventory() {											//costruttore
 		weight = 0;
 		backpack = new HashMap<Item,Integer>();
 	}
@@ -15,16 +15,14 @@ public class Inventory implements Serializable {
         return backpack;
     }
 	
-	public boolean findItem(Item i) {	//ritorna true se un Item i è contenuto nell'inventario
+	public boolean findItem(Item i) {		//ritorna true se un Item i è contenuto nell'inventario
 		if(backpack.containsKey(i)){
 			return true;
 		}
-		//System.out.println("Oggetto non trovato");       //print solo PER CONTROLLO;
 		return false;
-		//return backpack.containsKey(i);
 	}
 	
-	public Item getItemById(String id) {
+	public Item getItemById(String id) {					//ritorna un Item dato il suo id (Stringa) come parametro
         for (Item item : backpack.keySet()) {
             if (item.getidItem().equalsIgnoreCase(id)) {
                 return item;
@@ -33,7 +31,7 @@ public class Inventory implements Serializable {
         return null; 
     }
 	
-	public void removeItem(Item i, int q) {
+	public void removeItem(Item i, int q) {						//rimuove q Item i dall'inventario
 		if (!findItem(i)) {
             System.out.println("Nothing to remove");
         } else {
@@ -51,7 +49,7 @@ public class Inventory implements Serializable {
             }
         }	
 	}
-	public void addItem(Item i,int q) {
+	public void addItem(Item i,int q) {								//rimuove q Item i dall'inventario							
 		if (!i.isPickable() || (weight + i.getWeight() * q) > MAX_WEIGHT) {
             System.out.println("The object is too heavy");
         } else {
@@ -60,7 +58,7 @@ public class Inventory implements Serializable {
             System.out.println("Object added in your inventory");
         }	
 	}
-	public void showInventory() {		//visualizza tutto l'inventario	(item con quantità)	
+	public void showInventory() {								//visualizza tutto l'inventario	(item con relativa quantità)	
 		if(backpack.isEmpty()) {
 			System.out.println("The inventory is empty");
 		}
@@ -79,7 +77,7 @@ public class Inventory implements Serializable {
 	public int getWeight(){
 		return weight;
 	}
-	public int getQuantity(Item x){				//restituisce la quantità di un dato item
+	public int getQuantity(Item x){				//restituisce la quantità presente nell'inventario di un dato item
 		if(findItem(x)) {
 		int w=backpack.get(x);
 		return w;
