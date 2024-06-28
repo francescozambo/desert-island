@@ -11,7 +11,7 @@ public class Food extends Item {
 	public void useItem(Player player) {
 		player.setHealth(player.getHealth()+healthPoints);
 		player.getInventory().removeItem(this, 1);
-		System.out.println("You used " + this.getidItem() + " and got " + this.getHp() + " HP.");
+		System.out.println("You eat 1 " + this.getidItem() + " and got " + this.getHp() + " HP.");
 		System.out.println("Your health is now: "+player.getHealth()+"/"+player.getMaxHealth());
 	}
 

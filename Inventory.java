@@ -85,7 +85,7 @@ public class Inventory implements Serializable {
 		return w;
 		}
 		else {
-			System.out.println("Object is not in the backpack");
+			System.out.println(x.getidItem()+" is not in your backpack");
 			return -1;
 		}
 	}
