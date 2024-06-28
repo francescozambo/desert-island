@@ -21,7 +21,6 @@ public class Player extends Character {
 		previousLocation.setVisisted();
 	}
 	actualLocation = r;
-		//System.out.println("You've arrived in the: "+actualLocation.getIdRoom());
 	}
 	
 	public Room getLocation() {

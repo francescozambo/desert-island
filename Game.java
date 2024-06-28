@@ -5,7 +5,7 @@ public class Game {
 	DesertIsland island=null; 
 	Player player=null; 
 	Story story = new Story();
-	Game(){																//Caso nuova partita;
+	Game(){																//Costruttore nuova partita;
 		island = new DesertIsland();
 		System.out.println("What's your name?");
 		Scanner scanner = new Scanner (System.in);
@@ -15,17 +15,17 @@ public class Game {
 		player.movePlayer(island.getStartRoom());
 		
 	}
-	Game(int x) throws IOException, ClassNotFoundException{				//Caso gioco "caricato";
+	Game(int x) throws IOException, ClassNotFoundException{				//Costruttore gioco "caricato"
 			FileInputStream file = new FileInputStream("file.txt");
 			ObjectInputStream input = new ObjectInputStream(file);
 			island = (DesertIsland)input.readObject();
 			player = (Player) input.readObject();
 	}
-	Game(int x, int y){
+	Game(int x, int y){												//Costruttore gioco caso eliminazione file di salvataggio
 		deleteFile("file.txt");
 	}
 	
-	public void play() throws IOException{
+	public void play() throws IOException{									//esegue le azioni associate ai comandi
 		Scanner scanner = new Scanner(System.in);
         boolean playing = true;
         displayCommands();
@@ -173,15 +173,10 @@ public class Game {
                     }
                     break;
                 	case "drop":
-                    //System.out.println("Enter the item name you want to drop:");
-                    //String itemNameToDrop = scanner.nextLine();
                     String itemNameToDrop = words[1];
                     Item itemDropped = player.getInventory().getItemById(itemNameToDrop);
                         if (itemDropped!=null) {
-                           // System.out.println("Enter quantity:");
-                           // int quantityToDrop = scanner.nextInt();
                             int quantityToDrop = Integer.parseInt(words[2]);
-                          //  scanner.nextLine(); // Consume newline
                             if(player.getInventory().getQuantity(itemDropped)>=quantityToDrop) {
                             player.getInventory().removeItem(itemDropped, quantityToDrop);
                             currentRoom.addItem(itemDropped, quantityToDrop);
@@ -217,7 +212,7 @@ public class Game {
         scanner.close();
 	}
 	
-	private void printStatusGame() {
+	private void printStatusGame() {																		//Stampa le informazioni del giocatore
 		System.out.println("Player Room: "+player.getLocation().getIdRoom());
 		System.out.println("Player Health: "+player.getHealth()+"/"+player.getMaxHealth());
 		System.out.println("Player Inventory: ");
@@ -236,7 +231,7 @@ public class Game {
 		
 	}
 	
-	public static void deleteFile(String filePath) {
+	public static void deleteFile(String filePath) {												//elimina i file del gioco
         File file = new File(filePath);
         if (file.exists()) {
             if (file.delete()) {
@@ -266,7 +261,8 @@ public class Game {
         System.out.println("help --> show commands");
         
     }
-	private static String[] splitCommand(String s) {
+	
+	private static String[] splitCommand(String s) {				//metodo che data una stringa la divide in parole
 		final int maxWord =3;
 		String[] x = s.split(" ");
 		if(x.length<=maxWord) {

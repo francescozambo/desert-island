@@ -8,10 +8,10 @@ public class Main {
     		Scanner scanner =new Scanner(System.in);
     		x=scanner.next();
     		if(x.equalsIgnoreCase("new")) {
-    		game=new Game();	//NUOVO GIOCO
+    		game=new Game();							//Nuovo gioco 
     		game.play();
     		}
-    		else if(x.equalsIgnoreCase("continue")){		//CONTINUAZIONE GIOCO PRECEDENTE
+    		else if(x.equalsIgnoreCase("continue")){		//Continua da un salvataggio precedente, se non trova il file lancia un messaggio
     			try {
     			game=new Game(1);
     			System.out.println("WELCOME BACK");
@@ -24,7 +24,7 @@ public class Main {
     				System.out.println("Something went (very) wrong :(");
     			}
     		}
-    		else if(x.equalsIgnoreCase("reset")) {	//ELIMINA IL FILE DI SALVATAGGIO{
+    		else if(x.equalsIgnoreCase("reset")) {	//Elimina il file di salvataggio
     			game=new Game(1,1);
     		}
     		else {
