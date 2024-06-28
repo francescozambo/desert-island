@@ -2,12 +2,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Story {
-	Random random =new Random();
+	Random random;
 	Story(){
-		
+		random = new Random();
 	}
 	public void beginnin(String x) {
-		System.out.println("Hello "+x+"! \nYou are an adventurer who has woken up on the beach of an island that seems abandoned...\n"
+		System.out.println("Hello "+x+"! \n\nYou are an adventurer who has woken up on the beach of an island that seems abandoned...\n"
 				+ "You don't know how you ended up here, but you feel that you have to leave as soon as possible.\nExplore and interact to try to figure out how to escape\n");
 	}
 	public void seaCreatureDialogue() {
@@ -46,6 +46,9 @@ public class Story {
 					else {
 						System.out.println("OLD SAILOR: Nothing...keep up");
 					}
+				}
+				else if(x.equalsIgnoreCase("save")){
+					System.out.println("You can not save now...help the old sailor first");
 				}
 				else {
 					System.out.println("OLD SAILOR: Help me, Lazybones!");

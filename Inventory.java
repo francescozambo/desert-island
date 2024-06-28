@@ -19,7 +19,7 @@ public class Inventory implements Serializable {
 		if(backpack.containsKey(i)){
 			return true;
 		}
-		System.out.println("Oggetto non trovato");       //print solo PER CONTROLLO;
+		//System.out.println("Oggetto non trovato");       //print solo PER CONTROLLO;
 		return false;
 		//return backpack.containsKey(i);
 	}

@@ -40,6 +40,9 @@ public class Game {
                 case "look":
                     currentRoom.showItems();
                     break;
+                case "player":
+                	player.printStatusPlayer();
+                	break;
                 case "map":
                 	player.showMap();
                 	break;
@@ -242,17 +245,18 @@ public class Game {
 	private static void displayCommands() {							//Stampa i comandi del gioco 
         System.out.println("Available commands:");
         System.out.println("look --> Look around the room");
+        System.out.println("player --> View player status");
+        System.out.println("inventory --> Show your inventory");
+        System.out.println("map --> show map");
         System.out.println("move + direction (north/south/west/east) --> Move to another room in the chosen direction");
         System.out.println("back --> Go back to the last room");
-        System.out.println("inventory --> Show your inventory");
         System.out.println("pickup + item name + quantity --> Pick up an item");
-        System.out.println("drop --> Drop an item");
+        System.out.println("drop + item name + quantity --> Drop an item");
         System.out.println("interact --> Interact with an NPC");
-        System.out.println("back --> Go back to the previous room");
         System.out.println("exit --> Quit the game");
         System.out.println("save --> save the game");
         System.out.println("help --> show commands");
-        System.out.println("map --> show map");
+        
     }
 	private static String[] splitCommand(String s) {
 		final int maxWord =3;

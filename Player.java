@@ -56,11 +56,25 @@ public class Player extends Character {
 		 }
 		}
 		else {
-			System.out.println("Yuo don't have a map piece");
+			System.out.println("You don't have any map piece");
 		}
 	}
 	public void setWeapon(Item x) {
 		
+	}
+	public Item getWeapon() {
+		return weapon;
+	}
+	public void printStatusPlayer() {
+		System.out.println("MAP PIECE FOUND: "+mapPieces+"/"+nMap);
+		System.out.println("HEALTH: "+getHealth()+"/"+getMaxHealth());
+		System.out.println("DAMAGE: "+getDamage());
+		if(weapon!=null) {
+			System.out.println("WEAPON: "+getWeapon().getidItem());
+		}
+		else {
+			System.out.println("WEAPON: Bare hands");
+		}
 	}
 
 }
