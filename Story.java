@@ -65,11 +65,12 @@ public class Story {
 		
 	}
 	public void firstInteractionCave(DesertIsland ds,Player player, NPC npc){
+		String answer="";
 		int riddleGuessed=0;
-		int tries=0;
 		System.out.println(npc.getIdCharacter().toUpperCase()+": Hello "+player.getIdCharacter()+"!\nYeah i know your name, even though I'm down here all day, I know"
-				+ "everything about this island\nI've heard you are looking for a map piece...I have one, i can give it to you if you play riddles with me\nLet's start or quit (typer start or quit)");
-		String answer=in.nextLine();
+				+ " everything about this island\nI've heard you are looking for a map piece...I have one, i can give it to you if you play riddles with me\nLet's start or quit (typer start or quit)");
+		while(!answer.equalsIgnoreCase("quit")&&npc.getInteract()==false) {
+		answer=in.nextLine();
 		switch(answer) {
 		case "quit":
 			System.out.println(npc.getIdCharacter().toUpperCase()+": As you want, but I think we will see each other soon");
@@ -77,35 +78,49 @@ public class Story {
 		case "start": 
 			System.out.println(npc.getIdCharacter().toUpperCase()+": Let's start!");
 			for(int i=1;i<=3;i++) {
+				int tries=0;
 				System.out.println(npc.getIdCharacter().toUpperCase()+": Here is the "+i+"° riddle: "+getRiddle(i-1));
 				String guess="";
 				do {
 					guess=in.nextLine();
-					tries=tries+1;
-					if(guess.equalsIgnoreCase(getRiddleAnswer(i))) {
-						tries=3;
+					if(guess.equalsIgnoreCase(getRiddleAnswer(i-1))) {
 						riddleGuessed=riddleGuessed+1;
 						System.out.println(npc.getIdCharacter().toUpperCase()+": That's correct!");
+						break;
 					}
 					else {
 						tries=tries+1;
 						System.out.println(npc.getIdCharacter().toUpperCase()+": Wrong answer");
-						if(tries>=3)
+						if(tries>=3&&i!=3) {
 							System.out.println(npc.getIdCharacter().toUpperCase()+": Ok, maybe this riddle is too difficult, let's do another one");
+							break;
+						}
 					}
 				}
-				while(tries<3||guess.equalsIgnoreCase(getRiddleAnswer(i)));
+				while(tries<3);
 			}
-			if(riddleGuessed<=1) {
-				System.out.println(npc.getIdCharacter().toUpperCase()+": Ok, riddles are not your forte");
+			if(riddleGuessed<=2) {
+				System.out.println(npc.getIdCharacter().toUpperCase()+": Ok, riddles are not your forte\nI'm still going to give you the map piece, I don't need it"
+						+ " i know this island by heart\n");
+				npc.setInteract();
+				player.getMapString(npc.interact(),2);
+				System.out.println("YOU WERE GIVEN A MAP PIECE!...It says: "+npc.interact()+"\nYou have now "
+						+player.returnNMapPieces()+"/"+player.returnNTMapPieces()+" Map pieces\n");
+				break;
 			}
 			else {
-				System.out.println(npc.getIdCharacter().toUpperCase()+": You are good at riddles!");
+				System.out.println(npc.getIdCharacter().toUpperCase()+": You are good at riddles! I'm impressed You deserved the map piece!");
+				npc.setInteract();
+				player.getMapString(npc.interact(),2);
+				System.out.println("YOU WERE GIVEN A MAP PIECE!...It says: "+npc.interact()+"\nYou have now "
+						+player.returnNMapPieces()+"/"+player.returnNTMapPieces()+" Map pieces\n");
+				break;
 			}
-			break;
+			
 		default:
 			System.out.println(npc.getIdCharacter().toUpperCase()+": Speak clear!");
 			break;
+		}
 		}
 	}
 	public void firstInteractionOcean(DesertIsland ds,Player player, NPC npc){
