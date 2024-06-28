@@ -100,7 +100,7 @@ public class Game {
                     break;
                 case "save":
                 	saveGame();
-                	System.out.println("Partita salvata");
+                	System.out.println("GAME SAVED");
                 	printStatusGame();
                 	break;
                 default:
