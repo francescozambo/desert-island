@@ -1,11 +1,12 @@
+import java.io.Serializable;
 import java.util.HashMap;
 //import java.util.Iterator;
-public class Inventory {
+public class Inventory implements Serializable {
 	private HashMap<Item,Integer> backpack;
 	private int weight;
-	private final static int MAX_WEIGHT=10;		//capienza massima inventario (per ora settata a 10);
+	private final static int MAX_WEIGHT=10;							//costante per memorizzare la capienza massima dell'inventario
 	
-	public Inventory() {			//costruttore
+	public Inventory() {											//costruttore
 		weight = 0;
 		backpack = new HashMap<Item,Integer>();
 	}
@@ -14,16 +15,23 @@ public class Inventory {
         return backpack;
     }
 	
-	public boolean findItem(Item i) {	//ritorna true se un Item i è contenuto nell'inventario
+	public boolean findItem(Item i) {		//ritorna true se un Item i è contenuto nell'inventario
 		if(backpack.containsKey(i)){
 			return true;
 		}
-		System.out.println("Oggetto non trovato");       //print solo PER CONTROLLO;
 		return false;
-		//return backpack.containsKey(i);
 	}
 	
-	public void removeItem(Item i, int q) {
+	public Item getItemById(String id) {					//ritorna un Item dato il suo id (Stringa) come parametro
+        for (Item item : backpack.keySet()) {
+            if (item.getidItem().equalsIgnoreCase(id)) {
+                return item;
+            }
+        }
+        return null; 
+    }
+	
+	public void removeItem(Item i, int q) {						//rimuove q Item i dall'inventario
 		if (!findItem(i)) {
             System.out.println("Nothing to remove");
         } else {
@@ -41,7 +49,7 @@ public class Inventory {
             }
         }	
 	}
-	public void addItem(Item i,int q) {
+	public void addItem(Item i,int q) {								//rimuove q Item i dall'inventario							
 		if (!i.isPickable() || (weight + i.getWeight() * q) > MAX_WEIGHT) {
             System.out.println("The object is too heavy");
         } else {
@@ -50,19 +58,34 @@ public class Inventory {
             System.out.println("Object added in your inventory");
         }	
 	}
-	public void showInventory() {		//visualizza tutto l'inventario	(item con quantità)										
-		System.out.println("INVENTORY:");
+	public void showInventory() {								//visualizza tutto l'inventario	(item con relativa quantità)	
+		if(backpack.isEmpty()) {
+			System.out.println("The inventory is empty");
+		}
+		else {
 			for (Item key : backpack.keySet()) {
 				int value = backpack.get(key);
 				System.out.println(key.getidItem() + ": " + value);
 			}
-		System.out.println("PESO INVENTARIO: " + weight);
+		}
+		System.out.println("PESO INVENTARIO: " + weight + "/"+MAX_WEIGHT);
 	}
-	public boolean isFull(){
-		return weight==MAX_WEIGHT;
+	public boolean isFull(int x){			//controlla se con un peso x aggiunto, l'inventario è pieno o no
+		return weight+x>MAX_WEIGHT;
+
 	}
 	public int getWeight(){
 		return weight;
+	}
+	public int getQuantity(Item x){				//restituisce la quantità presente nell'inventario di un dato item
+		if(findItem(x)) {
+		int w=backpack.get(x);
+		return w;
+		}
+		else {
+			System.out.println(x.getidItem()+" is not in your backpack");
+			return -1;
+		}
 	}
 
 }

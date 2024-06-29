@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Item {
+public class Item  implements Serializable{
 	private String idItem;
 	private int weight;
 	private boolean pick;     //indica se l'oggetto può essere raccolto o no
@@ -10,6 +11,11 @@ public class Item {
 		weight = y;	
 		pick = p;
 	}
+	Item(String x){
+		idItem = x;
+		weight = 100;	
+		pick = false;
+	}
 	
 	int getWeight() {
 		return weight;
@@ -19,6 +25,9 @@ public class Item {
 	}
 	boolean isPickable() {
 		return pick;
+	}
+	public void useItem(Player player) {
+		System.out.println("You can't use this object");
 	}
 }
 
