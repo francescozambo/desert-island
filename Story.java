@@ -126,7 +126,35 @@ public class Story {
 	public void firstInteractionOcean(DesertIsland ds,Player player, NPC npc){
 		
 	}
-	private int  generateRandomNumber(int x) {					//genera numeri random da 1 a x
+	public void randomEvent(Player player, Room room) {
+		String idRoom = room.getIdRoom();
+		int number=generateRandomNumber(5);
+		int hp=generateRandomNumber(15)+6;
+		if(number==3||number==2) {		
+		switch(idRoom) {
+		case "Ocean":
+			System.out.println("\nYou were attacked by a shark and lost a finger\nYou lost "+hp+" lifepoints\n");
+			player.removeHealth(hp);
+			break;
+		case "Forest":
+			System.out.println("\nAn unknown type of spider bite you and gave you an infection\nYou lost "+hp+" lifepoints\n");
+			player.removeHealth(hp);
+			break;
+		case "Cave":
+			System.out.println("\nYou fell in a rift and almost broke your neck\nYou lost "+hp+" lifepoints\n");
+			player.removeHealth(hp);
+			break;
+		case "Beach":
+			System.out.println("\nYou fell aspleep in the sun and got a sunstroke\nYou lost "+hp+" lifepoints\n");
+			player.removeHealth(hp);
+			break;
+		default:
+		throw new IllegalArgumentException(); 
+		
+		}
+		}
+	}
+	private int generateRandomNumber(int x) {					//genera numeri random da 1 a x
 		int max=x;
 		int number=random.nextInt((max - 1) + 1) +1;
 		return number;

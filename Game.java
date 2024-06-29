@@ -48,6 +48,12 @@ public class Game {
             }
 
         if(player.allMap()==true) {
+        	player.showMap();
+        	System.out.print("Congratulation, you won!\n");
+        	playing=false;
+        }
+        if(player.isAlive()==false) {
+        	System.out.print("You died\n");
         	playing=false;
         }
     }
@@ -178,15 +184,17 @@ public class Game {
     }
 		return true;
 	}
-private boolean process2WordCommand(Room currentRoom,String words[]) {
+
+	private boolean process2WordCommand(Room currentRoom,String words[]) {
 		switch(words[0]) {
         case "move":
         	if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
             String direction = words[1];
             Room newRoom = currentRoom.returnRoom(direction);
             if (newRoom != null) {
+            	story.randomEvent(player, newRoom);
                 player.movePlayer(newRoom);
-               // System.out.println("You moved to " + newRoom.getIdRoom());
+                // System.out.println("You moved to " + newRoom.getIdRoom());
             } else {
                 System.out.println("You can't go that way.");
             }
@@ -211,6 +219,7 @@ private boolean process2WordCommand(Room currentRoom,String words[]) {
     	}
 		return true;
 	}
+	
 	private boolean process3WordCommand(Room currentRoom,String words[]) {
     	try {
             switch(words[0]) {

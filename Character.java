@@ -5,21 +5,29 @@ public class Character implements Serializable{
 	private int maxHealth;
 	private int health;
 	protected int damage; 
+	boolean isAlive;
 	
 	Character(String id, int mH,int d){		//costruttore
 		idCharacter = id;
 		maxHealth = mH;
 		health = maxHealth;
 		damage = d;
+		isAlive=true;
 		
 	}
 	public boolean isAlive(){
-		return health > 0;
+		return isAlive;
 	}
-	public void setHealth(int x) {
-		health = x;
+	public void giveHealth(int x) {
+		health = health+x;
 		if(health>=maxHealth){
 			health=maxHealth;
+		}
+	}
+	public void removeHealth(int x) {
+		health = health-x;
+		if(health<=0){
+			isAlive=false;
 		}
 	}
 	public String getIdCharacter() {
