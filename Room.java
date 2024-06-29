@@ -7,8 +7,9 @@ public class Room implements Serializable{
 	private HashMap<Item,Integer> roomItem; 
 	private HashMap<String, Room> connectedRoom;
 	private NPC npc;
-	private boolean visited=false;
+	private boolean visited;
 	Room(String name){
+		visited=false;
 		idRoom = name;
 		roomItem = new HashMap<Item,Integer>();
 		connectedRoom = new HashMap<String, Room>();

@@ -12,15 +12,16 @@ public class Player extends Character {
 	Player(String id, int mH,int d) {
 		super(id, mH,d);
 		previousLocation = null;
+		actualLocation=null;
 		inventory=new Inventory();
 	}
 	
 	public void movePlayer(Room r) {			//sposta il giocatore in un'altra stanza
-	if (actualLocation != null) {
+		if (actualLocation != null) { 
 		previousLocation = actualLocation;
 		previousLocation.setVisisted();
-	}
-	actualLocation = r;
+		}
+		actualLocation = r;
 	}
 	
 	public Room getLocation() {
@@ -67,6 +68,7 @@ public class Player extends Character {
 	}
 	public void printStatusPlayer() {									//Stampa le informazioni relative al player
 		System.out.println("MAP PIECE FOUND: "+mapPieces+"/"+nMap);
+		System.out.println("BIOME: "+actualLocation.getIdRoom());
 		System.out.println("HEALTH: "+getHealth()+"/"+getMaxHealth());
 		System.out.println("DAMAGE: "+getDamage());
 		if(weapon!=null) {
