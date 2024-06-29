@@ -27,7 +27,7 @@ public class PlayerTest {
 	        assertEquals(initialRoom,player.getLastLocation());
 	        assertTrue(initialRoom.getVisited()); 
 	    }
-	    public void getMapString() {			//aggiunge un "pezzo" di mappa e aumenta di 1 il numero di pezzi di mappa del player
+	    public void getMapString() {		
 			player.getMapString(mapString, mapPosition);
 			assertEquals(player.getMap(mapPosition-1),mapString+" ");
 		}
