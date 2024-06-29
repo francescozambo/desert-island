@@ -114,6 +114,7 @@ public class Game {
 		switch (words[0]){
         case "look":
             currentRoom.showItems();
+            System.out.println("\nNPC: "+currentRoom.getNPC().getIdCharacter());
             break;
         case "player":
         	player.printStatusPlayer();
