@@ -8,6 +8,8 @@ public class PlayerTest {
 	 private Player player;
 	    private Room initialRoom;
 	    private Room newRoom;
+	    private String mapString="Test";
+	    private int mapPosition=1;
 
 	    @Before
 	    public void setUp() {
@@ -25,6 +27,10 @@ public class PlayerTest {
 	        assertEquals(initialRoom,player.getLastLocation());
 	        assertTrue(initialRoom.getVisited()); 
 	    }
+	    public void getMapString() {			//aggiunge un "pezzo" di mappa e aumenta di 1 il numero di pezzi di mappa del player
+			player.getMapString(mapString, mapPosition);
+			assertEquals(player.getMap(mapPosition-1),mapString+" ");
+		}
 	    
 
 }

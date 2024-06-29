@@ -23,6 +23,9 @@ public class Player extends Character {
 		}
 		actualLocation = r;
 	}
+	public String getMap(int x) {
+		return map[x-1];
+	}
 	
 	public Room getLocation() {
 		return actualLocation;
