@@ -28,12 +28,14 @@ public class RoomTest {
 	}
 	
 	private Room room;
+	Item item1;
+	Item item2;
 
     @Before
     public void setUp1() {
         room = new Room("Test Room"); 
-        Item item1 = new Item("Item1", 1, true);
-        Item item2 = new Item("Item2", 4, true);
+        item1 = new Item("Item1", 1, true);
+        item2 = new Item("Item2", 4, true);
         room.getRoomItems().put(item1, 2);
         room.getRoomItems().put(item2, 3);
     }
@@ -41,11 +43,13 @@ public class RoomTest {
     @Test
     public void testRemoveItem() {
         // Verifica la rimozione di un elemento esistente
-        Item itemToRemove = new Item("Item1", 1, true);
+        Item itemToRemove = item1;
         int initialSize = room.getRoomItems().size();
         room.removeItem(itemToRemove, 1); 
-       //assertEquals(initialSize - 1, room.getRoomItems().size()); //HashMap deve essere diminuita di 1 come dimensione
         assertEquals(1, (int)room.getRoomItems().get(itemToRemove)); // Verifica che siano rimasti 1 elemento di item1 nella stanza
+        itemToRemove = item2;
+        room.removeItem(itemToRemove, 3); 
+        assertEquals(initialSize - 1, room.getRoomItems().size()); //HashMap deve essere diminuita di 1 come dimensione
 
         // Verifica la rimozione di un elemento non esistente
         Item nonExistingItem = new Item("NonExistingItem", 1, true); 
