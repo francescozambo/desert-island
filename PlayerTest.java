@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class PlayerTest {
 
-	 private Player player;
+	 	private Player player;
 	    private Room initialRoom;
 	    private Room newRoom;
 	    private String mapString="Test";
