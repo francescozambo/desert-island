@@ -33,7 +33,7 @@ public class Story {
 					player.getLocation().removeItem(player.getLocation().getItemById("Dune"), 1);
 					if(t==compass) {
 						System.out.println(npc.getIdCharacter().toUpperCase()+": We found the compass...thanks for your help, i'll give you my knife");
-						Item i = new Item("Knife",4,true);
+						Item i = new Weapon("Knife",4,true,20);
 						player.getLocation().addItem(i,1);
 					}
 					else if(t==map) {
