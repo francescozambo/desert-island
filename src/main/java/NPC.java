@@ -1,3 +1,4 @@
+package src.main.java;
 public class NPC extends Character {
     private String mapPiece;
     private boolean interact=false;				//variabile booleana per memorizzare se è già stata eseguita o no un'interazione con l'NPC

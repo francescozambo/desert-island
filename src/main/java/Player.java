@@ -1,4 +1,4 @@
-
+package src.main.java;
 public class Player extends Character {
 	
 	private Room actualLocation;
@@ -9,7 +9,7 @@ public class Player extends Character {
 	private Item weapon = null;
 	private String[] map = new String[nMap];			//vettore per contenere i "pezzi" di mappa
 
-	Player(String id, int mH,int d) {
+	public Player(String id, int mH,int d) {
 		super(id, mH,d);
 		previousLocation = null;
 		actualLocation=null;

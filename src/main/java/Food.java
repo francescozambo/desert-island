@@ -1,4 +1,4 @@
-
+package src.main.java;
 public class Food extends Item {
 	private int healthPoints;
 	Food(String x, int y, boolean p, int hp) {

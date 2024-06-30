@@ -1,4 +1,4 @@
-
+package src.main.java;
 public class Weapon extends Item {
 	private int damage;
 	Weapon(String x, int y, boolean p, int d) {

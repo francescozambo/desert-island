@@ -1,3 +1,4 @@
+package src.main.java;
 import java.io.Serializable;
 
 public class DesertIsland implements Serializable {

@@ -1,3 +1,4 @@
+package src.main.java;
 import java.io.Serializable;
 
 public class Item  implements Serializable{
@@ -6,7 +7,7 @@ public class Item  implements Serializable{
 	private boolean pick;     //indica se l'oggetto può essere raccolto o no
 	
 	
-	Item(String x, int y, boolean p){
+	public Item(String x, int y, boolean p){
 		idItem = x;
 		weight = y;	
 		pick = p;

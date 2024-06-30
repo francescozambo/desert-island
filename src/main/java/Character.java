@@ -1,3 +1,5 @@
+package src.main.java;
+
 import java.io.Serializable;
 
 public class Character implements Serializable{

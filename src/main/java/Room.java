@@ -1,3 +1,4 @@
+package src.main.java;
 import java.io.Serializable;
 import java.util.HashMap;
 //import java.util.Iterator;
@@ -8,7 +9,7 @@ public class Room implements Serializable{
 	private HashMap<String, Room> connectedRoom;
 	private NPC npc;
 	private boolean visited;
-	Room(String name){
+	public Room(String name){
 		visited=false;
 		idRoom = name;
 		roomItem = new HashMap<Item,Integer>();

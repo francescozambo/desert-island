@@ -1,6 +1,12 @@
+package src.test.java;
+
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.*;
+
+import src.main.java.Item;
+import src.main.java.Room;
 
 public class RoomTest {
 	Room testRoom; 
