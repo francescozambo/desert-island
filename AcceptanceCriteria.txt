@@ -1,0 +1,8 @@
+﻿1. As a player I want to fight different enemies and get riddle, gathering items and completing rooms. 
+2. As a player I want to have an inventory to store items to fight enemies and win all the map pieces.
+3. As a player I want to choose to start a new game, reset my game or restart it whenever I want and easily by the menu.
+4. As a player i want to eat some food to get some life again and be able to win the matches.
+5. As a player i want to use the transporter room to enjoy more my game and maybe be lucky. 
+6. As a player i want to complete the game winning or losing it. If life get =0 points I want the game to tell me that i’ve lost. Otherwise if I get the four map pieces I want the game to tell me that I’ve won. 
+7. As a player I want to get a ribble and pass it to go over the match and get a little help. 
+8. As a player I want to match the enemies to get the next room. Player should watch out the enemies because his game could be over. Player can survive the match only by using weapons.
