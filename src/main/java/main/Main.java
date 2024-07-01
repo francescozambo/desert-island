@@ -9,7 +9,7 @@ public class Main {
     		Scanner scanner =new Scanner(System.in);
     		x=scanner.next();
     		if(x.equalsIgnoreCase("new")) {
-    		game=new Game();							//Nuovo gioco 
+    		game=new Game();							//Nuovo gioco new
     		game.play();
     		}
     		else if(x.equalsIgnoreCase("continue")){		//Continua da un salvataggio precedente, se non trova il file lancia un messaggio

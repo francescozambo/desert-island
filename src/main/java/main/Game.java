@@ -37,15 +37,15 @@ public class Game {
             String command = scanner.nextLine().trim().toLowerCase();
             String words[] = splitCommand(command);
             if(words.length==1) {
-            playing =process1WordCommand(currentRoom, words);
+                playing =process1WordCommand(currentRoom, words);
             }
             else if(words.length==2) {
 		 
-            playing=process2WordCommand(currentRoom, words);	
+                playing=process2WordCommand(currentRoom, words);	
             
             }
             else {
-            playing=process3WordCommand(currentRoom, words);
+                playing=process3WordCommand(currentRoom, words);
             }
 
         if(player.allMap()==true) {
@@ -56,6 +56,17 @@ public class Game {
         if(player.isAlive()==false) {
         	System.out.print("You died\n");
         	playing=false;
+        }
+        // Check if the player is in the transporter room
+        if (currentRoom.equals(island.getTransporterRoom())) {
+            Room randomRoom = island.getRandomRoom();
+            player.movePlayer(randomRoom);
+            System.out.println("You have been magically transported to " + randomRoom.getIdRoom());
+        }else {
+            // Se il giocatore si è spostato in una nuova stanza, visualizza un messaggio
+            if (!currentRoom.equals(player.getLastLocation())) {
+                System.out.println("You have moved to " + currentRoom.getIdRoom());
+            }
         }
     }
         System.out.print("GAME OVER\n");

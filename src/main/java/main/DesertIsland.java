@@ -1,5 +1,8 @@
 package main;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class DesertIsland implements Serializable {
 	
@@ -8,11 +11,15 @@ public class DesertIsland implements Serializable {
     private Room forest;
     private Room cave;
     private Room ocean;
+    private Room transporter;  // New transporter room
+
 	private Item crab;
     private Item steak;
     private Item stone;
     private Item dune;
     private Item showel;
+
+    private List<Room> allRooms;  // List to store all rooms
     
     
     DesertIsland(){
@@ -20,21 +27,33 @@ public class DesertIsland implements Serializable {
     	forest = new Room("Forest");
     	cave = new Room("Cave");
     	ocean = new Room("Ocean");
-    	dune = new Item("Dune");
-    	crab = new Food ("Crab", 1, true,5);
-    	steak = new Food("Steak", 3, true,10);
+        transporter = new Room("Transporter");  // Initialize transporter room
+        
+        crab = new Food ("Crab", 1, true,5);
+        steak = new Food("Steak", 3, true,10);
+    	
+        dune = new Item("Dune");
     	stone = new Item("Stone", 5, true);
     	showel = new Item("Showel",8,true);
-    	connectRoom();
+
+        allRooms = new ArrayList<>();
+        allRooms.add(beach);
+        allRooms.add(forest);
+        allRooms.add(cave);
+        allRooms.add(ocean);
+        allRooms.add(transporter);  // Add transporter to the list
+    	
+        connectRoom();
     	addRoomItem();
     	setRoomNPC();
     }
     
     private void connectRoom() {
-    beach.connectRoom(ocean, forest, null, null);
+    beach.connectRoom(ocean, forest, null, transporter);
     forest.connectRoom(beach, cave, null, null);
-    cave.connectRoom(forest, null, null, null);
+    cave.connectRoom(forest, null, transporter, null);
     ocean.connectRoom(null, beach, null, null);
+    transporter.connectRoom(null, null, beach, cave);  
     }
 
    private void addRoomItem(){
@@ -57,5 +76,14 @@ public class DesertIsland implements Serializable {
 	   return x.getNPC();
 	   
    }
+
+   public Room getTransporterRoom() {
+    return transporter;
+}
+
+    public Room getRandomRoom() {
+        Random rand = new Random();
+        return allRooms.get(rand.nextInt(allRooms.size()));
+    }
 
 }

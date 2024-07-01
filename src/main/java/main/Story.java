@@ -82,6 +82,11 @@ public class Story {
 		
 	}
 	public void firstInteractionForest(Player player, NPC npc){
+		System.out.println("       ^  ^  ^   ^      ___I_      ^  ^   ^  ^  ^   ^  ^\r\n" + //
+						"      /|\\/|\\/|\\ /|\\    /\\-_--\\    /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n" + //
+						"      /|\\/|\\/|\\ /|\\   /  \\_-__\\   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\\r\n" + //
+						"      /|\\/|\\/|\\ /|\\   |[]| [] |   /|\\/|\\ /|\\/|\\/|\\ /|\\/|\\"
+			+"\n");
 		System.out.println(npc.getIdCharacter().toUpperCase()+": Who it is... Who are you? Be careful in this forest! A mysterous creature is assaulting our villages\nWe call it the Feralis..."
 				+ "It's hearing is excellent, \nI suggest you picking up stones so you can throw them and distract it if you unfortunately come across it\nBe careful");
 		npc.setHide();
@@ -112,6 +117,32 @@ public class Story {
 	public void firstInteractionCave(Player player, NPC npc){
 		String answer="";
 		int riddleGuessed=0;
+		System.out.println("\n  ********************************************************************************\r\n" + //
+						"*                    /   \\              /'\\       _                              *\r\n" + //
+						"*\\_..           /'.,/     \\_         .,'   \\     / \\_                            *\r\n" + //
+						"*    \\         /            \\      _/       \\_  /    \\     _                     *\r\n" + //
+						"*     \\__,.   /              \\    /           \\/.,   _|  _/ \\                    *\r\n" + //
+						"*          \\_/                \\  /',.,''\\      \\_ \\_/  \\/    \\                   *\r\n" + //
+						"*                           _  \\/   /    ',../',.\\    _/      \\                  *\r\n" + //
+						"*             /           _/m\\  \\  /    |         \\  /.,/'\\   _\\                 *\r\n" + //
+						"*           _/           /MMmm\\  \\_     |          \\/      \\_/  \\                *\r\n" + //
+						"*          /      \\     |MMMMmm|   \\__   \\          \\_       \\   \\_              *\r\n" + //
+						"*                  \\   /MMMMMMm|      \\   \\           \\       \\    \\             *\r\n" + //
+						"*                   \\  |MMMMMMmm\\      \\___            \\_      \\_   \\            *\r\n" + //
+						"*                    \\|MMMMMMMMmm|____.'  /\\_            \\       \\   \\_          *\r\n" + //
+						"*                    /'.,___________...,,'   \\            \\   \\        \\         *\r\n" + //
+						"*                   /       \\          |      \\    |__     \\   \\_       \\        *\r\n" + //
+						"*                 _/        |           \\      \\_     \\     \\    \\       \\_      *\r\n" + //
+						"*                /                               \\     \\     \\_   \\        \\     *\r\n" + //
+						"*                                                 \\     \\      \\   \\__      \\    *\r\n" + //
+						"*                                                  \\     \\_     \\     \\      \\   *\r\n" + //
+						"*                                                   |      \\     \\     \\      \\  *\r\n" + //
+						"*                                                    \\            |            \\ *\r\n" + //
+						" ********************************************************************************"
+		+"\n"
+		);
+		
+
 		System.out.println(npc.getIdCharacter().toUpperCase()+": Hello "+player.getIdCharacter()+"!\nYeah i know your name, even though I'm down here all day, I know"
 				+ " everything about this island\nI've heard you are looking for a map piece...I have one, i can give it to you if you play riddles with me\nLet's start or quit (typer start or quit)");
 		while(!answer.equalsIgnoreCase("quit")&&npc.getInteract()==false) {
@@ -169,6 +200,32 @@ public class Story {
 		}
 	}
 	public void firstInteractionOcean(DesertIsland ds,Player player, NPC npc){
+		System.out.println("\n 		           //\"\"\\\\\\\r\n" + //
+						"                          ((    (()\r\n" + //
+						"                         () @ @  ))\r\n" + //
+						"                         (( /   ())\r\n" + //
+						"                         ))) =  (((\r\n" + //
+						"                        ((()`''^(())\r\n" + //
+						"                        )))()    \\((\r\n" + //
+						"                       (((()( *) *)))\r\n" + //
+						"                        )/)()    /()\r\n" + //
+						"                       (/ /)   .( (\\\r\n" + //
+						"                       / /)(`'''^\\\\ \\\r\n" + //
+						"                      / / /)      ''--.\r\n" + //
+						"                    _/ /  \\            `\\--_\r\n" + //
+						"                  _///^)---`-./        .'   \\_\r\n" + //
+						"                _/           /       .^       \\_\r\n" + //
+						"      _________/            /     _-^           \\____________________________\r\n" + //
+						"      _- ~~ - /            /    .'               \\ =~~  - _ =  - _~_ =  -  - \r\n" + //
+						"        =~_ _/           _/  .-'                  \\_  =_ -  ~~ - _ = ~  --  ~ \r\n" + //
+						"      ~ - _/         ,-'`    \\                      \\-~~ _  = ~_-   -- _~~  = \r\n" + //
+						"      = ~/         .^    |    \\                      \\_ ~  -   _  = ~ -  ~  _ \r\n" + //
+						"       -/         /     /\\     \\                       \\=  ~ ~  = -   ~ _ -~~\r\n" + //
+						"      -/         /    .'  \\     \\                       \\_~  = _ ~  = ~   ~ = \r\n" + //
+						"                '--''^     `.    \\\r\n" + //
+						"                             `'--`"
+		+"\n"
+		);
 
 		System.out.println("\nAs you explore the beach, you notice a strange glimmer in the water. As you get closer, a beautiful siren appears.");
         System.out.println(npc.getIdCharacter().toUpperCase() + ": Greetings, brave adventurer. I am the guardian of these waters. I have seen your struggles and I offer my aid.\n"
