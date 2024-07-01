@@ -11,7 +11,6 @@ public class DesertIsland implements Serializable {
     private Room forest;
     private Room cave;
     private Room ocean;
-    private Room transporter;  // New transporter room
 
 	private Item crab;
     private Item steak;
@@ -27,7 +26,6 @@ public class DesertIsland implements Serializable {
     	forest = new Room("Forest");
     	cave = new Room("Cave");
     	ocean = new Room("Ocean");
-        transporter = new Room("Transporter");  // Initialize transporter room
         
         crab = new Food ("Crab", 1, true,5);
         steak = new Food("Steak", 3, true,10);
@@ -41,7 +39,6 @@ public class DesertIsland implements Serializable {
         allRooms.add(forest);
         allRooms.add(cave);
         allRooms.add(ocean);
-        allRooms.add(transporter);  // Add transporter to the list
     	
         connectRoom();
     	addRoomItem();
@@ -49,11 +46,10 @@ public class DesertIsland implements Serializable {
     }
     
     private void connectRoom() {
-    beach.connectRoom(ocean, forest, null, transporter);
+    beach.connectRoom(ocean, forest, null, null);
     forest.connectRoom(beach, cave, null, null);
-    cave.connectRoom(forest, null, transporter, null);
+    cave.connectRoom(forest, null, null, null);
     ocean.connectRoom(null, beach, null, null);
-    transporter.connectRoom(null, null, beach, cave);  
     }
 
    private void addRoomItem(){
@@ -76,10 +72,6 @@ public class DesertIsland implements Serializable {
 	   return x.getNPC();
 	   
    }
-
-   public Room getTransporterRoom() {
-    return transporter;
-}
 
     public Room getRandomRoom() {
         Random rand = new Random();
