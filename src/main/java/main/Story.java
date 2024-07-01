@@ -185,7 +185,7 @@ public class Story {
             guess = in.nextLine();
             if (guess.equalsIgnoreCase("Echo")) {
                 System.out.println("The chest opens, revealing the first magical pearl!");
-                player.getInventory().addItem(new Item("First Pearl", 1, true),1);
+                player.getInventory().addItem(new Item("Pearl1", 1, true),1);
                 findSecondPearl(ds, player, npc);
                 return;
             } else {
@@ -205,7 +205,7 @@ public class Story {
             action = in.nextLine();
             if (action.equalsIgnoreCase("attack")) {
                 System.out.println("You bravely fight the octopus and it retreats. You find the second pearl hidden in the cave.");
-                player.getInventory().addItem(new Item("Second Pearl", 1, true),1);
+                player.getInventory().addItem(new Item("Pearl2", 1, true),1);
                 findThirdPearl(ds, player, npc);
                 return;
             } else {
@@ -223,7 +223,7 @@ public class Story {
             action = in.nextLine();
             if (action.equalsIgnoreCase("grab")) {
                 System.out.println("You successfully grab the final pearl!");
-                player.getInventory().addItem(new Item("Third Pearl", 1, true),1);
+                player.getInventory().addItem(new Item("Pearl3", 1, true),1);
                 completePearlQuest(ds, player, npc);
                 return;
             } else {
