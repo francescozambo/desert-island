@@ -8,7 +8,7 @@ public class Character implements Serializable{
 	protected int damage; 
 	boolean isAlive;
 	
-	Character(String id, int mH,int d){		//costruttore
+	public Character(String id, int mH,int d){		//costruttore
 		idCharacter = id;
 		maxHealth = mH;
 		health = maxHealth;
