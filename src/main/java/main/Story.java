@@ -135,8 +135,89 @@ public class Story {
 		}
 	}
 	public void firstInteractionOcean(DesertIsland ds,Player player, NPC npc){
+
+		System.out.println("As you explore the beach, you notice a strange glimmer in the water. As you get closer, a beautiful siren appears.");
+        System.out.println(npc.getIdCharacter().toUpperCase() + ": Greetings, brave adventurer. I am the guardian of these waters. I have seen your struggles and I offer my aid.\n"
+                + "I need your help to recover three magical pearls hidden in the depths of the ocean. In return, I will give you a piece of the map that leads to a great treasure.\n"
+                + "Are you ready to accept this quest? (type yes or no)");
+        
+        String response = in.nextLine();
+        if (response.equalsIgnoreCase("yes")) {
+            System.out.println(npc.getIdCharacter().toUpperCase() + ": Excellent! The first pearl is hidden in a sunken shipwreck. Be careful, as the waters are treacherous.");
+            // Implementazione della missione per trovare la prima perla
+			findFirstPearl(ds, player, npc);
+
+        } else {
+            System.out.println(npc.getIdCharacter().toUpperCase() + ": I understand. Return to me when you are ready to embark on this quest.");
+        }
 		
 	}
+
+	public void findFirstPearl(DesertIsland ds, Player player, NPC npc) {
+        System.out.println("You dive into the ocean, swimming towards the shipwreck. As you explore the wreck, you find a chest locked with a riddle.");
+        System.out.println("Riddle: I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?");
+        
+        String guess = "";
+        int tries = 0;
+        while (!guess.equalsIgnoreCase("Echo") && tries < 3) {
+            guess = in.nextLine();
+            if (guess.equalsIgnoreCase("Echo")) {
+                System.out.println("The chest opens, revealing the first magical pearl!");
+                player.getInventory().addItem(new Item("First Pearl", 1, true));
+                findSecondPearl(ds, player, npc);
+                return;
+            } else {
+                tries++;
+                System.out.println("Incorrect. Try again.");
+            }
+        }
+        System.out.println("You couldn't solve the riddle and the chest remains locked. Return to the surface and speak with the siren for guidance.");
+    }
+    
+    public void findSecondPearl(DesertIsland ds, Player player, NPC npc) {
+        System.out.println(npc.getIdCharacter().toUpperCase() + ": You have found the first pearl! The second pearl is guarded by a giant octopus in an underwater cave. Good luck!");
+        System.out.println("You swim into the cave, and the giant octopus attacks. Use your knife to fend it off! (type attack)");
+        
+        String action = "";
+        while (!action.equalsIgnoreCase("attack")) {
+            action = in.nextLine();
+            if (action.equalsIgnoreCase("attack")) {
+                System.out.println("You bravely fight the octopus and it retreats. You find the second pearl hidden in the cave.");
+                player.getInventory().addItem(new Item("Second Pearl", 1, true));
+                findThirdPearl(ds, player, npc);
+                return;
+            } else {
+                System.out.println("You hesitate, the octopus is getting closer!");
+            }
+        }
+    }
+    
+    public void findThirdPearl(DesertIsland ds, Player player, NPC npc) {
+        System.out.println(npc.getIdCharacter().toUpperCase() + ": You have found the second pearl! The final pearl is in the depths of a coral reef. Beware of the poisonous sea urchins.");
+        System.out.println("You carefully navigate the reef, avoiding the sea urchins. After a long search, you spot the final pearl glowing among the corals. (type grab)");
+        
+        String action = "";
+        while (!action.equalsIgnoreCase("grab")) {
+            action = in.nextLine();
+            if (action.equalsIgnoreCase("grab")) {
+                System.out.println("You successfully grab the final pearl!");
+                player.getInventory().addItem(new Item("Third Pearl", 1, true));
+                completePearlQuest(ds, player, npc);
+                return;
+            } else {
+                System.out.println("Be careful, the sea urchins are dangerous!");
+            }
+        }
+    }
+    
+    public void completePearlQuest(DesertIsland ds, Player player, NPC npc) {
+        System.out.println(npc.getIdCharacter().toUpperCase() + ": You have found all three pearls! As promised, here is a piece of the map.");
+        npc.setInteract();
+        player.getMapString(npc.interact(), 3);
+        System.out.println("YOU WERE GIVEN A MAP PIECE!...It says: " + npc.interact() + "\nYou have now "
+                + player.returnNMapPieces() + "/" + player.returnNTMapPieces() + " Map pieces\n");
+    }
+
 	public void randomEvent(Player player, Room room) {
 		String idRoom = room.getIdRoom();
 		int number=generateRandomNumber(5);

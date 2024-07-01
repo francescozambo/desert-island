@@ -147,6 +147,7 @@ public class Game {
                 		story.firtsInteractionBeach(island, player, npc);
                 		break;
                 	case "Ocean":
+                        story.firstInteractionOcean(island, player, npc);
                 		break;
                 	case "Forest":
                 		story.firstInteractionForest(island, player, npc);
