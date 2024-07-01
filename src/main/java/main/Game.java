@@ -144,18 +144,18 @@ public class Game {
             		try{
                 	switch(room.getIdRoom()) {
                 	case "Beach": 
-                		story.firtsInteractionBeach(island, player, npc);
+                		story.firtsInteractionBeach(player, npc);
                 		break;
                 	case "Ocean":
                 		break;
                 	case "Forest":
                 		if(npc.getHide()==true)
-                			story.secondInteractionForest(island, player, npc);
+                			story.secondInteractionForest(player, npc);
                 		else
-                			story.firstInteractionForest(island, player, npc);
+                			story.firstInteractionForest(player, npc);
                 		break;
                 	case "Cave":
-                		story.firstInteractionCave(island, player, npc);
+                		story.firstInteractionCave(player, npc);
                 		break;
                 	default: 
                 		throw new IllegalArgumentException("Unknown room");
@@ -167,7 +167,7 @@ public class Game {
                 }
             	else {
             		if(room.getIdRoom().equalsIgnoreCase("Forest")) {
-            			story.thirdInteractionForest(island, player, npc);
+            			story.thirdInteractionForest(player, npc);
             		}
             		else if(room.getIdRoom().equalsIgnoreCase("Ocean")) {
             			//Interazione Oceano
@@ -214,7 +214,7 @@ public class Game {
                 if(newRoom.getIdRoom().equalsIgnoreCase("Forest")&&newRoom.getNPC().getHide()==true) {
                 	
                 	
-                	story.secondInteractionForest(island, player, npc);
+                	story.secondInteractionForest( player, npc);
                 	
                 }
             } 
