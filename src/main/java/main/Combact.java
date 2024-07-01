@@ -37,20 +37,20 @@ public class Combact {
 			switch(c) {
 			case (1):
 				mob.flee(player);
-				System.out.println(mob.getIdCharacter()+" è scappato...hai recuperato vita\nOra hai: "+player.getHealth()+" lifepoints");
+				System.out.println(mob.getIdCharacter()+" moved back...you can take a breath\nNow you have: "+player.getHealth()+" lifepoints");
 			break;
 			case (2):
 				mob.attack(player);
-				System.out.println(mob.getIdCharacter()+" ti ha graffiato...hai perso un po' di vita\nOra hai: "+player.getHealth()+" lifepoints");
+				System.out.println(mob.getIdCharacter()+" bit you you...you are hurting\nNow you have: "+player.getHealth()+" lifepoints");
 				
 			break;
 			case(3):
 				mob.smallAttack(player);
-				System.out.println(mob.getIdCharacter()+" ti ha morso...hai perso vita\nOra hai: "+player.getHealth()+" lifepoints");
+				System.out.println(mob.getIdCharacter()+" scratched you...You are loosing blood\nNow you have: "+player.getHealth()+" lifepoints");
 			break;
 			case(4):
 				mob.cure();
-				System.out.println(mob.getIdCharacter()+" si è curato...\nOra ha: "+mob.getHealth()+" lifepoints");
+				System.out.println(mob.getIdCharacter()+" healed...\nOra ha: "+mob.getHealth()+" lifepoints");
 			break;
 			default:
 				System.out.println("The mob did nothing");

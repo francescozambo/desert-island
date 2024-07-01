@@ -1,7 +1,7 @@
 package main;
 
 public class Mob extends Character{
-	int action=0;
+	int actioncure=5;
 	final int fleeMalus =3;
 	final int smallAttack =6;
 	Mob(String id, int mH, int d) {
@@ -17,7 +17,7 @@ public class Mob extends Character{
 		player.removeHealth(smallAttack);
 	}
 	public void cure() {
-		this.giveHealth(action);
+		this.giveHealth(actioncure);
 	}
 
 }
