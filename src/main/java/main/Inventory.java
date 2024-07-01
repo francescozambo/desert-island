@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Inventory implements Serializable {
 	private HashMap<Item,Integer> backpack;
 	private int weight;
-	private final static int MAX_WEIGHT=10;							//costante per memorizzare la capienza massima dell'inventario
+	private final static int MAX_WEIGHT=20;							//costante per memorizzare la capienza massima dell'inventario
 	
 	public Inventory() {											//costruttore
 		weight = 0;
