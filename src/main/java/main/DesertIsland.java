@@ -9,7 +9,7 @@ public class DesertIsland implements Serializable {
     private Room cave;
     private Room ocean;
 	private Item crab;
-    private Item wood;
+    private Item steak;
     private Item stone;
     private Item dune;
     private Item showel;
@@ -22,8 +22,8 @@ public class DesertIsland implements Serializable {
     	ocean = new Room("Ocean");
     	dune = new Item("Dune");
     	crab = new Food ("Crab", 1, true,5);
-    	wood = new Item("Wood", 3, true);
-    	stone = new Item("Stone", 5, true);
+    	steak = new Food("Steak", 5, true,10);
+    	stone = new Item("Stone", 10, true);
     	showel = new Item("Showel",8,true);
     	connectRoom();
     	addRoomItem();
@@ -38,10 +38,10 @@ public class DesertIsland implements Serializable {
     }
 
    private void addRoomItem(){
-    beach.addItem(crab,3);
+    beach.addItem(crab,4);
     beach.addItem(dune, 4);
-    forest.addItem(wood, 5);
-    cave.addItem(stone, 2);
+    forest.addItem(steak, 5);
+    cave.addItem(stone, 6);
     beach.addItem(showel, 1);
    }
    private void setRoomNPC() {
