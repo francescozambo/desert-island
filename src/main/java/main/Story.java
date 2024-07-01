@@ -78,7 +78,7 @@ public class Story {
 	public void secondInteractionForest(Player player, NPC npc) {
 		int event = generateRandomNumber(3);
 		if(event == 3) {
-			Mob mob = new Mob("Feralis",200,200);
+			Mob mob = new Mob("Feralis",50,20);
 			System.out.println("You encountered Feralis");
 			Combact combact = new Combact(mob, player);
 			combact.start();

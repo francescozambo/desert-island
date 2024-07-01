@@ -58,7 +58,7 @@ public class Game {
         	playing=false;
         }
     }
-        System.out.print("This is Engame");
+        System.out.print("GAME OVER");
         scanner.close();
 	}
 	
