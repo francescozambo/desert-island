@@ -18,19 +18,22 @@ class CharacterTest {
 
     @Test
     public void testGiveHealth() {
-        character.removeHealth(50); // Bring health down to 50
-        character.giveHealth(30);
+        character.removeHealth(50); // Toglie 50 di vita
+        character.giveHealth(30);	//Da 50 di vita
         assertEquals(80, character.getHealth());
         character.giveHealth(50); // Health should not exceed maxHealth
         assertEquals(100, character.getHealth());
     }
 
     @Test
-    public void testRemoveHealth() {
+    public void testRemoveHealthAndNotDie() {
         character.removeHealth(30);
         assertEquals(70, character.getHealth());
         assertTrue(character.isAlive());
-        character.removeHealth(70);
+    }
+    @Test
+    public void testRemoveHealthAndDie() {
+        character.removeHealth(100);
         assertEquals(0, character.getHealth());
         assertFalse(character.isAlive());
     }

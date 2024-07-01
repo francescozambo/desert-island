@@ -1,7 +1,7 @@
 package main;
 public class Weapon extends Item {
 	private int damage;
-	Weapon(String x, int y, boolean p, int d) {
+	public Weapon(String x, int y, boolean p, int d) {
 		super(x, y, p);
 		damage =d;
 	}
