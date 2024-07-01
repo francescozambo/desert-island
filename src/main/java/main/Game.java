@@ -57,17 +57,6 @@ public class Game {
         	System.out.print("You died\n");
         	playing=false;
         }
-        // Check if the player is in the transporter room
-        if (currentRoom.equals(island.getTransporterRoom())) {
-            Room randomRoom = island.getRandomRoom();
-            player.movePlayer(randomRoom);
-            System.out.println("You have been magically transported to " + randomRoom.getIdRoom());
-        }else {
-            // Se il giocatore si è spostato in una nuova stanza, visualizza un messaggio
-            if (!currentRoom.equals(player.getLastLocation())) {
-                System.out.println("You have moved to " + currentRoom.getIdRoom());
-            }
-        }
     }
         System.out.print("GAME OVER\n");
         scanner.close();
