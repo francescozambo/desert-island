@@ -1,0 +1,51 @@
+TRASCRIZIONE SEQUENCE-DIAGRAM
+
+@startuml
+!theme materia-outline
+autonumber 
+
+skinparam ArrowColor #00B4D8
+skinparam ActorBorderColor #03045E
+skinparam ActorFontColor #00B4D8
+skinparam ActorBackgroundColor #CAF0F8
+skinparam ParticipantFontColor #00B4D8
+skinparam ParticipantBorderColor #03045E
+skinparam ParticipantBackgroundColor #90E0EF
+skinparam DatabaseBorderColor #03045E
+skinparam DatabaseBackgroundColor #00B4D8
+skinparam DatabaseFontColor #00B4D8
+skinparam BackgroundColor #FFFFFF
+
+title Desert-Island
+
+actor player
+database games
+participant room
+
+== Main Menu ==
+player->games: createGame
+games->room: load
+== Game ==
+loop Alive
+opt
+player->games: save
+games-->player: done
+end
+create entity NPC
+room->NPC: find
+loop Riddle
+player->NPC: tryingToGet
+NPC-->player: Lose
+end
+create entity enemy
+alt Enemy Attack
+player->enemy: attack
+create participant item
+enemy->item: drop
+player->item: collect
+else
+player->games: quit
+end
+end
+player->games: quit
+@enduml
