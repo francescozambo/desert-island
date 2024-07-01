@@ -4,7 +4,7 @@ public class Mob extends Character{
 	int actioncure=5;
 	final int fleeMalus =3;
 	final int smallAttack =6;
-	Mob(String id, int mH, int d) {
+	public Mob(String id, int mH, int d) {
 		super(id, mH, d);
 	}
 	public void flee(Player player) {
@@ -18,6 +18,15 @@ public class Mob extends Character{
 	}
 	public void cure() {
 		this.giveHealth(actioncure);
+	}
+	public int getfleeMalus() {
+		return fleeMalus;
+	}
+	public int getActioncure() {
+		return actioncure;
+	}
+	public int getSmallAttack() {
+		return smallAttack;
 	}
 
 }

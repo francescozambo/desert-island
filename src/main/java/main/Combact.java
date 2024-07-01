@@ -27,7 +27,7 @@ public class Combact {
 				break;
 			case ("distract"):
 			mob.removeHealth(player.throwStone());
-			System.out.println("You attacked "+mob.getIdCharacter()+"\nIt has now: "+mob.getHealth()+" lifepoints");
+			System.out.println(mob.getIdCharacter()+"\nIt has now: "+mob.getHealth()+" lifepoints");
 				break;
 			default:
 				System.out.println("Invalid command");
