@@ -1,5 +1,6 @@
 package main;
 import java.util.Random;
+
 import java.util.Scanner;
 
 public class Story {
@@ -14,7 +15,7 @@ public class Story {
 				+ "You don't know how you ended up here, but you feel that you have to leave as soon as possible.\nExplore and interact to try to figure out how to escape\n");
 	}
 	
-	public void firtsInteractionBeach(DesertIsland ds,Player player, NPC npc) {
+	public void firtsInteractionBeach(Player player, NPC npc) {
 		if(player.getInventory().findItem(player.getInventory().getItemById("Showel"))==true) {
 			System.out.println(npc.getIdCharacter().toUpperCase()+": Hello stranger! I think i lost my compass...I must had left it somewhere here and was covered by the sand\n"
 					+ "Can you help me find it? We just need to dig up these dunes...Type dig to use the showel");
@@ -68,20 +69,35 @@ public class Story {
 		}
 		
 	}
-	public void firstInteractionForest(DesertIsland ds,Player player, NPC npc){
+	public void firstInteractionForest(Player player, NPC npc){
 		System.out.println(npc.getIdCharacter().toUpperCase()+": Who it is... Who are you? Be careful in this forest! A mysterous creature is assaulting our villages\nWe call it the Feralis..."
 				+ "It's hearing is excellent, \nI suggest you picking up stones so you can throw them and distract it if you unfortunately come across it\nBe careful");
 		npc.setHide();
 		
 	}
-	public void secondInteractionForest(DesertIsland ds,Player player, NPC npc) {
-		
+	public void secondInteractionForest(Player player, NPC npc) {
+		int event = generateRandomNumber(3);
+		if(event == 3) {
+			Mob mob = new Mob("Feralis",200,200);
+			System.out.println("You encountered Feralis");
+			Combact combact = new Combact(mob, player);
+			combact.start();
+			if(combact.getWin()==true) {
+				System.out.println(npc.getIdCharacter() +": The villages are safe..here, take this map piece as a thanl you gift\nIt says: "+npc.interact()+"\nYou have now "
+						+player.returnNMapPieces()+"/"+player.returnNTMapPieces()+" Map pieces\n");
+				npc.setInteract();
+			}
+		}
+		else {
+			System.out.println(npc.getIdCharacter().toUpperCase()+": No feralis in sight");
+			
+		}
 	}
-	public void thirdInteractionForest(DesertIsland ds,Player player, NPC npc){
+	public void thirdInteractionForest(Player player, NPC npc){
 		System.out.println(npc.getIdCharacter().toUpperCase()+": Thank you so much for killing the Feralis!");
 		
 	}
-	public void firstInteractionCave(DesertIsland ds,Player player, NPC npc){
+	public void firstInteractionCave(Player player, NPC npc){
 		String answer="";
 		int riddleGuessed=0;
 		System.out.println(npc.getIdCharacter().toUpperCase()+": Hello "+player.getIdCharacter()+"!\nYeah i know your name, even though I'm down here all day, I know"

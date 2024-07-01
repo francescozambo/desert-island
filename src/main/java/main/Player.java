@@ -69,6 +69,33 @@ public class Player extends Character {
 	public Item getWeapon() {
 		return weapon;
 	}
+	public int throwStone() {
+		Item x=inventory.getItemById("Stone");
+		if(inventory.findItem(x)) {
+			System.out.println("You throw a stone");
+			inventory.removeItem(x,1);
+			return x.getWeight();
+		}
+		else
+		{
+			System.out.println("No stones to throw");
+			 return 0;
+		}
+		
+	}
+	public void cure() {
+		 for (Item item : getInventory().getBackpack().keySet()) {
+	            if (item instanceof Food) {
+	            	Food x = (Food) item;
+	            	x.useItem(this);
+	            }
+	            else {
+	            	System.out.println("You don't have food");
+	            }
+
+	
+	}
+}
 	public void printStatusPlayer() {									//Stampa le informazioni relative al player
 		System.out.println("MAP PIECE FOUND: "+mapPieces+"/"+nMap);
 		System.out.println("BIOME: "+actualLocation.getIdRoom());
