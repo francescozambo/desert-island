@@ -158,14 +158,14 @@ public class Story {
 	}
 	public void firstInteractionOcean(DesertIsland ds,Player player, NPC npc){
 
-		System.out.println("As you explore the beach, you notice a strange glimmer in the water. As you get closer, a beautiful siren appears.");
+		System.out.println("\nAs you explore the beach, you notice a strange glimmer in the water. As you get closer, a beautiful siren appears.");
         System.out.println(npc.getIdCharacter().toUpperCase() + ": Greetings, brave adventurer. I am the guardian of these waters. I have seen your struggles and I offer my aid.\n"
                 + "I need your help to recover three magical pearls hidden in the depths of the ocean. In return, I will give you a piece of the map that leads to a great treasure.\n"
                 + "Are you ready to accept this quest? (type yes or no)");
         
         String response = in.nextLine();
         if (response.equalsIgnoreCase("yes")) {
-            System.out.println(npc.getIdCharacter().toUpperCase() + ": Excellent! The first pearl is hidden in a sunken shipwreck. Be careful, as the waters are treacherous.");
+            System.out.println("\n"+npc.getIdCharacter().toUpperCase() + ": Excellent! The first pearl is hidden in a sunken shipwreck. Be careful, as the waters are treacherous.");
             // Implementazione della missione per trovare la prima perla
 			findFirstPearl(ds, player, npc);
 
@@ -176,7 +176,7 @@ public class Story {
 	}
 
 	public void findFirstPearl(DesertIsland ds, Player player, NPC npc) {
-        System.out.println("You dive into the ocean, swimming towards the shipwreck. As you explore the wreck, you find a chest locked with a riddle.");
+        System.out.println("You dive into the ocean, swimming towards the shipwreck. As you explore the wreck, you find a chest locked with a riddle.\n");
         System.out.println("Riddle: I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?");
         
         String guess = "";
@@ -197,8 +197,8 @@ public class Story {
     }
     
     public void findSecondPearl(DesertIsland ds, Player player, NPC npc) {
-        System.out.println(npc.getIdCharacter().toUpperCase() + ": You have found the first pearl! The second pearl is guarded by a giant octopus in an underwater cave. Good luck!");
-        System.out.println("You swim into the cave, and the giant octopus attacks. Use your knife to fend it off! (type attack)");
+        System.out.println("\n"+npc.getIdCharacter().toUpperCase() + ": You have found the first pearl! The second pearl is guarded by a giant octopus in an underwater cave. Good luck!");
+        System.out.println("You swim into the cave, and the giant octopus attacks. Defend yourself! (type attack)");
         
         String action = "";
         while (!action.equalsIgnoreCase("attack")) {
@@ -215,8 +215,8 @@ public class Story {
     }
     
     public void findThirdPearl(DesertIsland ds, Player player, NPC npc) {
-        System.out.println(npc.getIdCharacter().toUpperCase() + ": You have found the second pearl! The final pearl is in the depths of a coral reef. Beware of the poisonous sea urchins.");
-        System.out.println("You carefully navigate the reef, avoiding the sea urchins. After a long search, you spot the final pearl glowing among the corals. (type grab)");
+        System.out.println("\n"+npc.getIdCharacter().toUpperCase() + ": You have found the second pearl! The final pearl is in the depths of a coral reef. Beware of the poisonous sea urchins.");
+        System.out.println("You carefully navigate the reef, avoiding the sea urchins. After a long search, you spot the final pearl glowing among the corals. Grab it!");
         
         String action = "";
         while (!action.equalsIgnoreCase("grab")) {
@@ -227,7 +227,9 @@ public class Story {
                 completePearlQuest(ds, player, npc);
                 return;
             } else {
-                System.out.println("Be careful, the sea urchins are dangerous!");
+				Mob mob = new Mob("Sea urchins",0,5);
+				mob.attack(player);
+				System.out.println("Be careful, the sea urchins are dangerous!");
             }
         }
     }

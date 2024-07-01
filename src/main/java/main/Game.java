@@ -58,7 +58,7 @@ public class Game {
         	playing=false;
         }
     }
-        System.out.print("GAME OVER");
+        System.out.print("GAME OVER\n");
         scanner.close();
 	}
 	
