@@ -57,6 +57,15 @@ public class Game {
         	System.out.print("You died\n");
         	playing=false;
         }
+
+        // Check if the player moved to a different room
+        Room newRoom = player.getLocation();
+        if (currentRoom != newRoom && newRoom == island.getRandomRoomLocation()) {
+            System.out.println("You have moved to " + newRoom.getIdRoom());
+            System.out.println("You have entered with a magical transporter.");
+            currentRoom = newRoom;
+        }
+
     }
         System.out.print("GAME OVER\n");
         scanner.close();

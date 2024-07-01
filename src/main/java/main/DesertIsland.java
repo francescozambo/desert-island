@@ -11,6 +11,7 @@ public class DesertIsland implements Serializable {
     private Room forest;
     private Room cave;
     private Room ocean;
+    private Room random;
 
 	private Item crab;
     private Item steak;
@@ -39,6 +40,8 @@ public class DesertIsland implements Serializable {
         allRooms.add(forest);
         allRooms.add(cave);
         allRooms.add(ocean);
+
+        random = getRandomRoom();
     	
         connectRoom();
     	addRoomItem();
@@ -46,36 +49,40 @@ public class DesertIsland implements Serializable {
     }
     
     private void connectRoom() {
-    beach.connectRoom(ocean, forest, null, null);
+    beach.connectRoom(ocean, forest, null, random);
     forest.connectRoom(beach, cave, null, null);
-    cave.connectRoom(forest, null, null, null);
+    cave.connectRoom(forest, null, random, null);
     ocean.connectRoom(null, beach, null, null);
     }
 
-   private void addRoomItem(){
+    private void addRoomItem(){
     beach.addItem(crab,3);
     beach.addItem(dune, 4);
     forest.addItem(steak, 5);
     cave.addItem(stone, 6);
     beach.addItem(showel, 1);
-   }
-   private void setRoomNPC() {
+    }
+    private void setRoomNPC() {
 	   beach.setNPC("Old Sailor", 50, 5, "dream");
 	   forest.setNPC("Hunter", 70, 7, "wake");
 	   cave.setNPC("Miner", 60, 6, "up it");
 	   ocean.setNPC("Siren", 80, 8, "is a");
-   }
-   public Room getStartRoom() {
+    }
+    public Room getStartRoom() {
 	   return beach;
-   }
-   public NPC getRoomNPC(Room x){
+    }
+    public NPC getRoomNPC(Room x){
 	   return x.getNPC();
 	   
-   }
+    }
+
+    public Room getRandomRoomLocation() {
+        return random;
+    }
 
     public Room getRandomRoom() {
         Random rand = new Random();
-        return allRooms.get(rand.nextInt(allRooms.size()));
+        return allRooms.get(rand.nextInt(allRooms.size())); 
     }
 
 }
