@@ -7,14 +7,15 @@
     <artifactId>text-game</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <dependency>
+    
+
+
+    <dependencies>
+		<dependency>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-storage</artifactId>
     <version>2.1.0</version>
     </dependency>
-
-
-    <dependencies>
         <!-- JUnit Jupiter (JUnit 5) dependencies -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
