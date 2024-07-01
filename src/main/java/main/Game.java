@@ -207,9 +207,15 @@ public class Game {
         	if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
             String direction = words[1];
             Room newRoom = currentRoom.returnRoom(direction);
+<<<<<<< HEAD
 
             if (newRoom != null) {
             	NPC npc = newRoom.getNPC();
+=======
+            	if (newRoom != null) {
+            	 NPC npc = newRoom.getNPC();
+
+>>>>>>> 65defa1522cfef575d50ebad2e7f1731da66294e
             	story.randomEvent(player, newRoom);
                 player.movePlayer(newRoom);
                 // System.out.println("You moved to " + newRoom.getIdRoom());
