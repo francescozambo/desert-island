@@ -1,0 +1,223 @@
+@startuml
+class Weapon extends Item {
+-damage:Integer
++Weapon(x:String,y:Integer,p:boolean,d:Integer)
++getDamage():Integer
++useItem(player:Player)
+}
+
+class Story{
+Random:random
++Story()
++beginnin(x:String):voip
++firtsInteractionBeach(player:Player, npc:NPC):void
++firstInteractionForest(player:Player, npc:NPC):void
++secondInteractionForest(player:Player, npc:NPC):void
++thirdInteractionForest(player:Player, npc:NPC):void
++firstInteractionCave(player:Player, npc:NPC):void
++firstInteractionOcean(ds:DesertIsland,player:Player, npc:NPC):void
++findFirstPearl(ds:DesertIsland,player:Player, npc:NPC):void
++findSecondPearl(ds:DesertIsland,player:Player, npc:NPC):void
++findThirdPearl(ds:DesertIsland,player:Player, npc:NPC):void
++completePearlQuest(ds:DesertIsland,player:Player, npc:NPC):void
++randomEvent(player:Player, room:Room):void
+-generateRandomNumber(x:Integer):int
+-getRiddle(x:Integer):String
+-getRiddleAnswer(x:Integer):String
+}
+
+ class Room implements Serializable{
+-idRoom:String
+-roomItem:HashMap<Item,Integer> 
+-connectedRoom:HashMap<String, Room>
+-npc:NPC
+-visited:boolean
++Room(name:String)
++getIdRoom():String
++getRoomItems():HashMap<Item, Integer>
++findItem(x:Item):boolean
++getItemQuantity(x:Item):Integer
++getItemById(id:String):Item
++addItem(x:Item, quantity:Integer)
++removeItem(x:Item, quantity:Integer):void
++showItems():void
++connectRoom(north:Room, south:Room, east:Room, west:Room):void
++returnRoom(s:String):Room
++setNPC(s:String, mH:Integer,d:Integer, mapPiece:String):void
++getNPC():NPC
++getVisited():boolean
++setVisisted():void
+}
+
+class Player extends Character {
+-actualLocation:Room
+-previousLocation:Room
+-inventory:Inventory
+-mapPieces:int=0
+-nMap:int=4
+-weapon:Item
+-map:String[]
++Player(id:String,mH:Integer,d:Integer)
++movePlayer(room:Room):void
++getMap(ind:int):String
++getLocation():Room
++getInventory():Inventory
++getLastLocation():Room
++getMapString(x:String, s:int):void
++allMap():boolean
++returnNMapPieces():int
++returnNTMapPieces():int
++showMap():voip
++setWeapon(x:Weapon):void
++getWeapon():Item
++printStatusPlayer():void
+}
+
+class NPC extends Character {
+-mapPiece:String
+-interact:boolean=false
+-hide:boolean
++NPC(id:String,mH:Integer,d:Integer,mapPiece:String) 
++interact():String
++getInteract():boolean
++setInteract():void
++getHide():boolean
++setHide():void
+}
+
+
+class Mob extends Character{
+-actioncure:Integer=5
+-fleeMalus:Integer=3
+-smallAttack:Integer=6
++Mob(id:String,mH:Integer,d:Integer) 
++flee(player:Player):void
++attack(player:Player):void
++smallAttack(player:Player):void
++cure():void
++getfleeMalus():Integer
++getActioncure():Integer
++getSmallAttack():Integer
+}
+
+class Item implements Serializable{
+-idItem:String
+-weight:Integer
+-pick:boolean
++Item(x:String,y:Integer, p:boolean)
++Item(x:String)
++getWeigh():Integer
++getIdItem():String
++isPickable():boolean
++useItem(player:Player):void
+}
+
+class Inventory implements Serializable {
+-backpack:HashMap<Item, Integer>
+-weigth:Integer
+-MAX_WEIGHT:Integer=10
++Inventory()
++getBackPack():HashMap<Item, Integer>
++findItem(item:Item):boolean
++getItemById(idFind:String):Item
++removeItem(item:Item, quantity:Integer):void
++addItem(item:Item, quantity:Integer):void
++showInventory():void
++isFull(weight:Integer):boolean
++getWeight():Integer
++getQuantity(item:Item):Integer
+
+}
+
+class Game {
+-is:DesertIsland
+-player:Player
+-story:Story
++Game()
++Game(g:Integer)
++Game(g:Integer, g2:Integer)
++play():void
++printStatusGame():void
++saveGame():void
++deleteFile(filePath:String):void
++displayCommands():void
++process1WordCommand(currentRoom:Room, words[]:String):boolean
++process2WordCommand(currentRoom:Room, words[]:String):boolean
++process3WordCommand(currentRoom:Room, words[]:String):boolean
++splitCommand(string:String):String[]
+
+}
+
+class Food extends Item {
+-healthPoints:Integer
++Food(x:String,y:Integer, p:boolean, hp:Integer)
++getHp():Integer
++useItem(player:Player):void
+}
+
+
+class DesertIsland implements Serializable {
+-beach:Room
+-forest:Room
+-cave:Room
+-ocean:Room
+-crab:Item
+-wood:Item
+-stone:Item
+-dune:Item
+-showel:Item
+-allRooms:List<Room> 
++DesertIsland()
++connectRoom():void
++addRoomItem():void
++setRoomNPC():void
++getStartRoom():Room
++getRoomNPC(room:Room):NPC
++getRandomRoomLocation():Room
++getRandomRoom():Room
+}
+
+class Combact {
+-mob:Mob
+-player:Player
+-win:boolean=false
++Combact(mob:Mob,player:Player){
++start():void
++checkMob():boolean
++checkPlayer():boolean
++getWin():boolean
++generateRandomNumber(x:Integer):Integer
+}
+
+class Character implements Serializable{
+-idCharacter:String
+-maxHealth:Integer
+-health:Integer
+-damage:Integer
+-isAlive:boolean
++Character(id:String,mH:Integer,d:Integer)
++isAlive():boolean
++giveHealth(addHealth:Integer):void
++removeHealth(offHealth:Integer):void
++getIdCharacter():String
++getMaxHealth():Integer
++getHealth():Integer
++getDamage():Integer
+
+}
+
+Player "1" *-- "1" Inventory
+Room "1" o-- "*" Item
+Inventory "1" o-- "*" Item
+Game "1" *-- "*" Room
+Game "1" *-- "1" Player
+DesertIsland "1" *-- "*" Room
+Game "1" *-- "1" Story
+Combact "1" *-- "1" Player
+Combact *-- Mob
+Player "1" -- "1" Character
+Mob "*" -- "1" Character
+NPC "*" -- "1" Character
+Weapon "*" -- "1" Item
+Food "*" -- "1" Item
+@enduml
