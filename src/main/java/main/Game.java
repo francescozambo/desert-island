@@ -58,6 +58,7 @@ public class Game {
         	playing=false;
         }
     }
+        System.out.print("This is Engame");
         scanner.close();
 	}
 	
@@ -144,16 +145,19 @@ public class Game {
             		try{
                 	switch(room.getIdRoom()) {
                 	case "Beach": 
-                		story.firtsInteractionBeach(island, player, npc);
+                		story.firtsInteractionBeach(player, npc);
                 		break;
                 	case "Ocean":
                         story.firstInteractionOcean(island, player, npc);
                 		break;
                 	case "Forest":
-                		story.firstInteractionForest(island, player, npc);
+                		if(npc.getHide()==true)
+                			story.secondInteractionForest(player, npc);
+                		else
+                			story.firstInteractionForest(player, npc);
                 		break;
                 	case "Cave":
-                		story.firstInteractionCave(island, player, npc);
+                		story.firstInteractionCave(player, npc);
                 		break;
                 	default: 
                 		throw new IllegalArgumentException("Unknown room");
@@ -165,7 +169,7 @@ public class Game {
                 }
             	else {
             		if(room.getIdRoom().equalsIgnoreCase("Forest")) {
-            			story.thirdInteractionForest(island, player, npc);
+            			story.thirdInteractionForest(player, npc);
             		}
             		else if(room.getIdRoom().equalsIgnoreCase("Ocean")) {
             			//Interazione Oceano
@@ -203,26 +207,29 @@ public class Game {
         	if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
             String direction = words[1];
             Room newRoom = currentRoom.returnRoom(direction);
+<<<<<<< HEAD
             
             if (newRoom != null) {
             	NPC npc = newRoom.getNPC();
+=======
+           
+            if (newRoom != null) {
+            	 NPC npc = newRoom.getNPC();
+>>>>>>> origin/main-3-interazione-combact-classe
             	story.randomEvent(player, newRoom);
                 player.movePlayer(newRoom);
                 // System.out.println("You moved to " + newRoom.getIdRoom());
                 if(newRoom.getIdRoom().equalsIgnoreCase("Forest")&&newRoom.getNPC().getHide()==true) {
                 	
                 	
-                	story.secondInteractionForest(island, player, npc);
+                	story.secondInteractionForest( player, npc);
                 	
                 }
-            } else {
+            } 
+            else {
                 System.out.println("You can't go that way.");
             }
         	}	
-        	else {
-        		System.out.println("Invalid command, try again.");
-        		displayCommands();
-        	}
         break;
         case "use":
         	Item x = player.getInventory().getItemById(words[1]);

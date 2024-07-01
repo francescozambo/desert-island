@@ -28,6 +28,7 @@ public class Character implements Serializable{
 	public void removeHealth(int x) {
 		health = health-x;
 		if(health<=0){
+			health=0;
 			isAlive=false;
 		}
 	}
