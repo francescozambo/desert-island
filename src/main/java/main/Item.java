@@ -12,13 +12,13 @@ public class Item  implements Serializable{
 		weight = y;	
 		pick = p;
 	}
-	Item(String x){
+	public Item(String x){
 		idItem = x;
 		weight = 100;	
 		pick = false;
 	}
 	
-	int getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 	String getidItem(){
