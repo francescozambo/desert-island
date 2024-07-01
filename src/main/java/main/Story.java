@@ -63,6 +63,16 @@ public class Story {
 		
 	}
 	public void firstInteractionForest(DesertIsland ds,Player player, NPC npc){
+		System.out.println(npc.getIdCharacter().toUpperCase()+": Who it is... Who are you? Be careful in this forest! A mysterous creature is assaulting our villages\nWe call it the Feralis..."
+				+ "It's hearing is excellent, \nI suggest you picking up stones so you can throw them and distract it if you unfortunately come across it\nBe careful");
+		npc.setHide();
+		
+	}
+	public void secondInteractionForest(DesertIsland ds,Player player, NPC npc) {
+		
+	}
+	public void thirdInteractionForest(DesertIsland ds,Player player, NPC npc){
+		System.out.println(npc.getIdCharacter().toUpperCase()+": Thank you so much for killing the Feralis!");
 		
 	}
 	public void firstInteractionCave(DesertIsland ds,Player player, NPC npc){

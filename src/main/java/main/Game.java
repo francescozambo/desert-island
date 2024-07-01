@@ -149,6 +149,7 @@ public class Game {
                 	case "Ocean":
                 		break;
                 	case "Forest":
+                		story.firstInteractionForest(island, player, npc);
                 		break;
                 	case "Cave":
                 		story.firstInteractionCave(island, player, npc);
@@ -162,7 +163,15 @@ public class Game {
             		}
                 }
             	else {
+            		if(room.getIdRoom().equalsIgnoreCase("Forest")) {
+            			story.thirdInteractionForest(island, player, npc);
+            		}
+            		else if(room.getIdRoom().equalsIgnoreCase("Ocean")) {
+            			//Interazione Oceano
+            		}
+            		else {
             		 System.out.println(npc.getIdCharacter().toUpperCase()+": I have nothing to say");
+            		}
             	}
             } 
             else {
@@ -193,10 +202,17 @@ public class Game {
         	if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
             String direction = words[1];
             Room newRoom = currentRoom.returnRoom(direction);
+            NPC npc = newRoom.getNPC();
             if (newRoom != null) {
             	story.randomEvent(player, newRoom);
                 player.movePlayer(newRoom);
                 // System.out.println("You moved to " + newRoom.getIdRoom());
+                if(newRoom.getIdRoom().equalsIgnoreCase("Forest")&&newRoom.getNPC().getHide()==true) {
+                	
+                	
+                	story.secondInteractionForest(island, player, npc);
+                	
+                }
             } else {
                 System.out.println("You can't go that way.");
             }
