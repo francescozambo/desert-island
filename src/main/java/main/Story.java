@@ -1,5 +1,6 @@
 package main;
 import java.util.Random;
+
 import java.util.Scanner;
 
 public class Story {
@@ -69,7 +70,20 @@ public class Story {
 		
 	}
 	public void secondInteractionForest(DesertIsland ds,Player player, NPC npc) {
-		
+		int event = generateRandomNumber(3);
+		if(event == 3) {
+			Mob mob = new Mob("Feralis",200,200);
+			System.out.println("You encountered Feralis");
+			Combact combact = new Combact(mob, player);
+			combact.start();
+			if(combact.getWin()==true) {
+				npc.setInteract();
+			}
+		}
+		else {
+			System.out.println(npc.getIdCharacter().toUpperCase()+": No feralis in sight");
+			
+		}
 	}
 	public void thirdInteractionForest(DesertIsland ds,Player player, NPC npc){
 		System.out.println(npc.getIdCharacter().toUpperCase()+": Thank you so much for killing the Feralis!");

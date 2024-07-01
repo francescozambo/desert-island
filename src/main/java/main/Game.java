@@ -149,7 +149,10 @@ public class Game {
                 	case "Ocean":
                 		break;
                 	case "Forest":
-                		story.firstInteractionForest(island, player, npc);
+                		if(npc.getHide()==true)
+                			story.secondInteractionForest(island, player, npc);
+                		else
+                			story.firstInteractionForest(island, player, npc);
                 		break;
                 	case "Cave":
                 		story.firstInteractionCave(island, player, npc);
@@ -202,8 +205,9 @@ public class Game {
         	if(words[1].equalsIgnoreCase("north")||words[1].equalsIgnoreCase("south")||words[1].equalsIgnoreCase("west")||words[1].equalsIgnoreCase("east")) {
             String direction = words[1];
             Room newRoom = currentRoom.returnRoom(direction);
-            NPC npc = newRoom.getNPC();
+           
             if (newRoom != null) {
+            	 NPC npc = newRoom.getNPC();
             	story.randomEvent(player, newRoom);
                 player.movePlayer(newRoom);
                 // System.out.println("You moved to " + newRoom.getIdRoom());
@@ -213,14 +217,11 @@ public class Game {
                 	story.secondInteractionForest(island, player, npc);
                 	
                 }
-            } else {
+            } 
+            else {
                 System.out.println("You can't go that way.");
             }
         	}	
-        	else {
-        		System.out.println("Invalid command, try again.");
-        		displayCommands();
-        	}
         break;
         case "use":
         	Item x = player.getInventory().getItemById(words[1]);
