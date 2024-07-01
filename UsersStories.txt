@@ -1,0 +1,108 @@
+Salvataggio partita
+
+Descrizione:
+
+Come giocatore voglio poter salvare il gioco in qualsiasi momento, così da non perdere i progressi fatti e continuare dal punto in cui avevo lasciato.
+
+ 
+Criteri di Accettazione:
+
+Deve esserci un comando chiaro (“save”) per salvare;
+
+Deve esserci un comando chiaro per caricare (“load“) il gioco;
+
+Alla ripresa del gioco, lo stato del gioco deve rimanere invariato rispetto all’ultimo salvataggio;
+------------------------------------------------------------------------------------------------
+Navigazione tra le stanze
+Descrizione:
+
+Come giocatore, voglio poter muovermi tra le diverse stanze dell'isola utilizzando comandi direzionali, in modo da esplorare l'isola e trovare oggetti.
+
+
+Criteri di accettazione:
+
+Il giocatore può muoversi in una direzione specificata (nord, sud, est, ovest) se c'è una stanza collegata in quella direzione;
+
+Se non c'è una stanza collegata nella direzione specificata, il gioco informa il giocatore che non può muoversi in quella direzione o potrebbe esserci una stanza trasportatrice ad una stanza randomica.
+
+Dopo aver eseguito un comando di movimento valido, il gioco aggiorna la stanza corrente del giocatore;
+
+Con un comando specifico (“back“) il giocatore ritorna nell’ultima stanza
+------------------------------------------------------------------------------------------------
+Interazione Oggetti
+Descrizione:
+
+Come giocatore voglio interagire con gli oggetti presenti nel gioco per poterli raccogliere, utilizzarli e lasciarli.
+
+ 
+
+Criteri di Accettazione:
+
+Il giocatore può vedere gli oggetti nella stanza;
+
+Il giocatore può avvicinarsi agli oggetti e premere un tasto per raccoglierli;
+
+L'oggetto raccolto viene aggiunto all'inventario del giocatore;
+
+Il giocatore può aprire l'inventario;
+
+Il giocatore può selezionare un oggetto dall'inventario;
+
+Il giocatore può utilizzare l'oggetto selezionato;
+
+Il giocatore può scegliere di lasciare l’oggetto;
+
+L’oggetto lasciato viene visualizzato nella stanza;
+
+Gli NPC possono lasciare oggetti al giocatore;
+
+Gli oggetti lasciati dagli NPC sono visualizzabili nella stanza;
+------------------------------------------------------------------------------------------------
+Mappe
+Descrizione:
+
+Come giocatore devo poter raccogliere 4 pezzi di mappa così da poter completare il gioco.
+
+
+Criteri di Accettazione:
+
+In ogni stanza deve essere possibile trovare un pezzo di mappa;
+
+Quando si riesce ad ottenere un pezzo di mappa deve visualizzarsi un messaggio;
+
+Devo poter vedere quanti pezzi di mappa ho/mi mancano attraverso un comando (“map“);
+
+Quando ho tutti i pezzi di mappa deve apparire un messaggio di completamento del gioco;
+------------------------------------------------------------------------------------------------
+Interazione NPC
+Descrizione:
+
+Come giocatore devo essere in grado di interagire con gli NPC in modo tale da poter ottenere un pezzo di mappa
+
+
+
+Criteri di accettazione
+
+Con ogni NPC si possono effettuare interazioni.
+
+ Ogni interazione deve essere effettuata con un messaggio specifico
+
+Se un’interazione non è possibile con un determinato NPC deve essere visualizzato un messaggio
+
+Ogni NPC deve fornire indicazioni specifiche su come ottenere un pezzo di mappa, oppure dropparlo
+
+Come giocatore, devo sapere cosa fanno i comandi che possono essere utilizzati e la loro sintassi, in modo da avere chiaro il funzionamento del gioco e non ricevere messaggi di errore
+------------------------------------------------------------------------------------------------
+Comandi
+Descrizione:
+
+CRITERI DI ACCETTAZIONE
+
+All’inizio deve essere stampata una lista di tutti i comandi possibili, con la spiegazione di quello che fanno.
+
+I comandi devono essere chiari ed intuitivi. 
+
+Se la sintassi di un comando è errata, deve comparire un messaggio di errore.
+
+Il comando deve fare esattamente quello che ci si aspetta che faccia. 
+
