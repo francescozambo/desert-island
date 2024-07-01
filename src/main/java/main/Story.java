@@ -12,7 +12,18 @@ public class Story {
 	}
 	public void beginnin(String x) {
 		System.out.println("Hello "+x+"! \n\nYou are an adventurer who has woken up on the beach of an island that seems abandoned...\n"
-				+ "You don't know how you ended up here, but you feel that you have to leave as soon as possible.\nExplore and interact to try to figure out how to escape\n");
+				+ "You don't know how you ended up here, but you feel that you have to leave as soon as possible.\nExplore and interact to try to figure out how to escape\n"
+				+ "		   |\r\n" + //
+										"         \\ _ /\r\n" + //
+										"       -= (_) =-\r\n" + //
+										"         /   \\         _\\/_\r\n" + //
+										"           |           //o\\  _\\/_\r\n" + //
+										"    _____ _ __ __ ____ _ | __/o\\\\ _\r\n" + //
+										"  =-=-_-__=_-= _=_=-=_,-'|\"'\"\"-|-,_\r\n" + //
+										"   =- _=-=- -_=-=_,-\"          |\r\n" + //
+										"     =- =- -=.--\""
+				);
+
 	}
 	
 	public void firtsInteractionBeach(Player player, NPC npc) {
@@ -204,7 +215,7 @@ public class Story {
         while (!action.equalsIgnoreCase("attack")) {
             action = in.nextLine();
             if (action.equalsIgnoreCase("attack")) {
-                System.out.println("You bravely fight the octopus and it retreats. You find the second pearl hidden in the cave.");
+                System.out.println("You bravely scare the octopus and it retreats. You find the second pearl hidden in the cave.");
                 player.getInventory().addItem(new Item("Pearl2", 1, true),1);
                 findThirdPearl(ds, player, npc);
                 return;
