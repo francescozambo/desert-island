@@ -13,8 +13,7 @@ public class NPCTest {
     public void testInteractState() {
         NPC npc = new NPC("npc1", 100, 10, "mapPiece1");
 
-        // Verifica che inizialmente l'interazione con l'NPC sia false
-        assertFalse(npc.getInteract());
+        assertFalse(npc.getInteract());	
 
         // Esegui l'interazione con l'NPC e verifica che l'interact sia true
         npc.setInteract();
@@ -28,11 +27,11 @@ public class NPCTest {
         // Verifica che inizialmente hide sia false
         assertFalse(npc.getHide());
 
-        // Esegui il setHide e verifica che hide sia true
+        // Verifica che dopo il setHide il getHide sia true
         npc.setHide();
         assertTrue(npc.getHide());
 
-        // Esegui il setHide di nuovo e verifica che hide sia tornato a false
+        // Dopo un altro setHide, getHide deve tornare false
         npc.setHide();
         assertFalse(npc.getHide());
     }
