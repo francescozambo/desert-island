@@ -33,9 +33,15 @@ public class Story {
 					t=t+1;
 					player.getLocation().removeItem(player.getLocation().getItemById("Dune"), 1);
 					if(t==compass) {
-						System.out.println(npc.getIdCharacter().toUpperCase()+": We found the compass...thanks for your help, i'll give you my knife");
+						System.out.println(npc.getIdCharacter().toUpperCase()+": We found the compass...thanks for your help, i'll give you my knife if you have space in your backpack");
 						Item i = new Weapon("Knife",4,true,20);
-						player.getLocation().addItem(i,1);
+
+						if (player.getInventory().isFull(i.getWeight())) {
+                            player.getInventory().addItem(i,1);
+                        } else {
+                            player.getLocation().addItem(i, 1);
+                        }
+						//player.getLocation().addItem(i,1);
 					}
 					else if(t==map) {
 						player.getMapString(npc.interact(),4);
@@ -163,7 +169,7 @@ public class Story {
             guess = in.nextLine();
             if (guess.equalsIgnoreCase("Echo")) {
                 System.out.println("The chest opens, revealing the first magical pearl!");
-                player.getInventory().addItem(new Item("First Pearl", 1, true));
+                player.getInventory().addItem(new Item("First Pearl", 1, true),1);
                 findSecondPearl(ds, player, npc);
                 return;
             } else {
@@ -183,7 +189,7 @@ public class Story {
             action = in.nextLine();
             if (action.equalsIgnoreCase("attack")) {
                 System.out.println("You bravely fight the octopus and it retreats. You find the second pearl hidden in the cave.");
-                player.getInventory().addItem(new Item("Second Pearl", 1, true));
+                player.getInventory().addItem(new Item("Second Pearl", 1, true),1);
                 findThirdPearl(ds, player, npc);
                 return;
             } else {
@@ -201,7 +207,7 @@ public class Story {
             action = in.nextLine();
             if (action.equalsIgnoreCase("grab")) {
                 System.out.println("You successfully grab the final pearl!");
-                player.getInventory().addItem(new Item("Third Pearl", 1, true));
+                player.getInventory().addItem(new Item("Third Pearl", 1, true),1);
                 completePearlQuest(ds, player, npc);
                 return;
             } else {

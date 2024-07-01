@@ -72,7 +72,7 @@ public class Inventory implements Serializable {
 		System.out.println("PESO INVENTARIO: " + weight + "/"+MAX_WEIGHT);
 	}
 	public boolean isFull(int x){			//controlla se con un peso x aggiunto, l'inventario è pieno o no
-		return weight+x>MAX_WEIGHT;
+		return weight + x  > MAX_WEIGHT;
 
 	}
 	public int getWeight(){
