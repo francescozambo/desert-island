@@ -4,7 +4,7 @@ public class NPC extends Character {
     private boolean interact=false;				//variabile booleana per memorizzare se è già stata eseguita o no un'interazione con l'NPC
     private boolean hide;
    
-    NPC(String id, int mH, int d, String mapPiece) {		//costruttore
+    public NPC(String id, int mH, int d, String mapPiece) {		//costruttore
         super(id, mH, d);
         this.mapPiece = mapPiece;
         hide=false;
